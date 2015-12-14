@@ -3,11 +3,15 @@ package com.colim.anglexplore.stages;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ResolutionFileResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ResolutionFileResolver.*;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.colim.anglexplore.actors.GameAngle;
 import com.colim.anglexplore.actors.Point;
 import com.colim.anglexplore.utils.Constants;
+
+import java.util.ArrayList;
 
 /**
  * Created by hadri on 12/13/2015.
@@ -19,6 +23,7 @@ public class GameStage extends Stage {
     private GameAngle gameAngle;
     private Point point;
 
+
     public GameStage(){
         fileResolver = new ResolutionFileResolver(new InternalFileHandleResolver(), new Resolution(800, 480, "480"),
                 new Resolution(1280, 720, "720"), new Resolution(1920, 1080, "1080"));
@@ -26,6 +31,7 @@ public class GameStage extends Stage {
         setupCamera();
         gameAngle = new GameAngle();
         point = new Point();
+
         addActor(gameAngle);
         addActor(point);
     }

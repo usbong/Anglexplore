@@ -12,5 +12,6 @@ public class Constants {
 
     public static final float WORLD_HEIGHT = 720; // height of 10 meters
     public static final float WORLD_WIDTH = 1280; // width of 13 meters
+    public static final int NANGLES = 6; // number of angles
 
 }

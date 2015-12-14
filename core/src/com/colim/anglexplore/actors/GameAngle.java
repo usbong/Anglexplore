@@ -12,7 +12,6 @@ import com.colim.anglexplore.utils.Constants;
  */
 public class GameAngle extends Actor {
 
-    private Vector2 vertex, pointA, pointB;
     private ShapeRenderer shapeRenderer;
     static private boolean projectionMatrixSet;
 
@@ -32,9 +31,8 @@ public class GameAngle extends Actor {
         }
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Color.RED);
-        shapeRenderer.rect(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/2, 20, 20);
+        shapeRenderer.circle(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/2, 10);
         shapeRenderer.end();
         batch.begin();
-
     }
 }

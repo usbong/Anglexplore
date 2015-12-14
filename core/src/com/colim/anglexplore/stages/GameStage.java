@@ -6,6 +6,7 @@ import com.badlogic.gdx.assets.loaders.resolvers.ResolutionFileResolver.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.colim.anglexplore.actors.GameAngle;
+import com.colim.anglexplore.actors.Point;
 import com.colim.anglexplore.utils.Constants;
 
 /**
@@ -16,6 +17,7 @@ public class GameStage extends Stage {
     private ResolutionFileResolver fileResolver;
     private OrthographicCamera camera;
     private GameAngle gameAngle;
+    private Point point;
 
     public GameStage(){
         fileResolver = new ResolutionFileResolver(new InternalFileHandleResolver(), new Resolution(800, 480, "480"),
@@ -23,7 +25,9 @@ public class GameStage extends Stage {
         // use fileResolver for loading textures
         setupCamera();
         gameAngle = new GameAngle();
+        point = new Point();
         addActor(gameAngle);
+        addActor(point);
     }
 
     private void setupCamera() {

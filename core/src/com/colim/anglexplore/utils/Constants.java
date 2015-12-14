@@ -10,7 +10,7 @@ public class Constants {
         END
     }
 
-    public static final float VIRTUAL_HEIGHT = 20f; // height of 10 meters
-    public static final float VIRTUAL_WIDTH = 13f; // width of 13 meters
+    public static final float WORLD_HEIGHT = 720; // height of 10 meters
+    public static final float WORLD_WIDTH = 1280; // width of 13 meters
 
 }

@@ -22,12 +22,12 @@ public class GameStage extends Stage {
                 new Resolution(1280, 720, "720"), new Resolution(1920, 1080, "1080"));
         // use fileResolver for loading textures
         setupCamera();
-        //gameAngle = new GameAngle();
-        //addActor(gameAngle);
+        gameAngle = new GameAngle();
+        addActor(gameAngle);
     }
 
     private void setupCamera() {
-        camera = new OrthographicCamera(Constants.VIRTUAL_WIDTH, Constants.VIRTUAL_HEIGHT);
+        camera = new OrthographicCamera(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         camera.update();
     }

@@ -32,8 +32,9 @@ public class GameStage extends Stage {
         setupCamera();
         gameAngle = new GameAngle();
         point = new Point();
-
         point2 = new Point(new Vector2(0, 0), Color.RED);
+
+
         addActor(gameAngle);
         addActor(point);
         addActor(point2);
@@ -48,6 +49,5 @@ public class GameStage extends Stage {
     @Override
     public void draw(){
         super.draw();
-
     }
 }

@@ -2,12 +2,11 @@ package com.colim.anglexplore.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Camera;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.colim.anglexplore.stages.GameStage;
@@ -18,10 +17,14 @@ import com.colim.anglexplore.utils.Constants;
  */
 public class GameScreen extends ScreenAdapter {
 
-    private GameStage stage;
+    private Stage stage;
     private Viewport viewport;
     private Camera camera;
     private SpriteBatch batch;
+
+    private Texture generateTexture;
+    private Texture quitTexture;
+    private Texture answerTexture;
 
     public GameScreen(){
         stage = new GameStage();
@@ -34,6 +37,26 @@ public class GameScreen extends ScreenAdapter {
         camera.update();
         viewport = new FitViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT, camera);
         batch = new SpriteBatch();
+
+        stage = new Stage(viewport);
+        Gdx.input.setInputProcessor(stage);
+
+        answerTexture = new Texture("answer.png");
+        Image answer = new Image(answerTexture);
+        answer.setPosition(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/3, Align.center);
+        stage.addActor(answer);
+
+        generateTexture = new Texture("generate.png");
+        Image generate = new Image(generateTexture);
+        generate.setPosition(Constants.WORLD_WIDTH /3 + 20, Constants.WORLD_HEIGHT / 10,
+                Align.center);
+        stage.addActor(generate);
+
+        quitTexture = new Texture("quit.png");
+        Image quit = new Image(quitTexture);
+        quit.setPosition(5*Constants.WORLD_WIDTH /6 + 20, Constants.WORLD_HEIGHT / 10,
+                Align.center);
+        stage.addActor(quit);
     }
 
     @Override
@@ -68,6 +91,8 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
+        generateTexture.dispose();
+        quitTexture.dispose();
         stage.dispose();
         batch.dispose();
     }

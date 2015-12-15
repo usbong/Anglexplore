@@ -19,36 +19,26 @@ import com.colim.anglexplore.utils.Constants;
 public class GameScreen extends ScreenAdapter {
 
     private GameStage stage;
-    private Viewport viewport;
-    private Camera camera;
-    private SpriteBatch batch;
-
     public GameScreen(){
         stage = new GameStage();
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void show() {
-        camera = new OrthographicCamera();
-        camera.position.set(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 2, 0);
-        camera.update();
-        viewport = new FitViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT, camera);
-        batch = new SpriteBatch();
+
     }
 
     @Override
     public void render(float delta) {
         clearScreen();
-        batch.setProjectionMatrix(camera.projection);
-        batch.setTransformMatrix(camera.view);
-        batch.begin();
-        batch.end();
+        stage.act(delta);
         stage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
+
     }
 
     @Override
@@ -69,7 +59,6 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void dispose() {
         stage.dispose();
-        batch.dispose();
     }
 
     private void clearScreen(){

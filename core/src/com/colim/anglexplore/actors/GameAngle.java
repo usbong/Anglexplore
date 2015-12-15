@@ -29,10 +29,9 @@ public class GameAngle extends Actor {
         if(!projectionMatrixSet){
             shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
         }
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(Color.RED);
-        shapeRenderer.circle(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/2, 10);
-        shapeRenderer.end();
+
+
+
         batch.begin();
     }
 }

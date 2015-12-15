@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.colim.anglexplore.actors.GameAngle;
 import com.colim.anglexplore.actors.Point;
 import com.colim.anglexplore.utils.Constants;
@@ -29,11 +31,11 @@ public class GameStage extends Stage {
                 new Resolution(1280, 720, "720"), new Resolution(1920, 1080, "1080"));
         // use fileResolver for loading textures
         setupCamera();
-        gameAngle = new GameAngle();
-        point = new Point();
+        setViewport(new StretchViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT));
+        point = new Point(new Vector2(Constants.WORLD_WIDTH/2,Constants.WORLD_HEIGHT/2));
 
-        addActor(gameAngle);
         addActor(point);
+        setKeyboardFocus(point);
     }
 
     private void setupCamera() {
@@ -41,6 +43,8 @@ public class GameStage extends Stage {
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         camera.update();
     }
+
+
 
     @Override
     public void draw(){

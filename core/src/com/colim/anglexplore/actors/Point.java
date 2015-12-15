@@ -11,7 +11,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.colim.anglexplore.utils.Constants;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 
 /**
  * Created by hadri on 12/14/2015.
@@ -19,6 +20,7 @@ import com.colim.anglexplore.utils.Constants;
 public class Point extends Actor {
 
     private Vector2 position;
+    private float radius = 40f;
     private Color color;
     private ShapeRenderer shapeRenderer;
 
@@ -26,12 +28,26 @@ public class Point extends Actor {
         position = newPosition;
         color = newColor;
         shapeRenderer = new ShapeRenderer();
+        setBounds(position.x - radius, position.y - radius, radius * 2, radius * 2);
+        setTouchable(Touchable.enabled);
+        addListener(new InputListener(){
+
+        });
+}
+
+    public Point(Vector2 newPosition){
+        this(newPosition, Color.BLACK);
     }
 
-    public Point() {
-        position = new Vector2(Constants.WORLD_WIDTH/4, Constants.WORLD_HEIGHT/4);
-        color = Color.BLACK;
-        shapeRenderer = new ShapeRenderer();
+    @Override
+    protected void positionChanged() {
+        position.set(getX(), getY());
+        super.positionChanged();
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
     }
 
     @Override
@@ -40,7 +56,7 @@ public class Point extends Actor {
         batch.end();
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(color.r, color.g, color.b, color.a);
-        shapeRenderer.circle(position.x, position.y, 10);
+        shapeRenderer.circle(position.x, position.y, radius);
         shapeRenderer.end();
         batch.begin();
     }

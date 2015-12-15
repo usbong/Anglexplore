@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.colim.anglexplore.utils.Constants;
 
 /**
@@ -33,12 +34,12 @@ public class StartScreen extends ScreenAdapter {
     }
 
     public void show(){
-        stage = new Stage(new FitViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT));
+        stage = new Stage(new StretchViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(stage);
 
-        playTexture = new Texture("tap_unpressed.png");
+        playTexture = new Texture("unpressed.png");
         playPressTexture = new
-                Texture("tap_pressed.png");
+                Texture("pressed.png");
 
         play = new ImageButton(new TextureRegionDrawable(new
                 TextureRegion(playTexture)), new TextureRegionDrawable(new

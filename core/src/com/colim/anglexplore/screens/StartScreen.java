@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.colim.anglexplore.utils.Constants;
+import javafx.scene.AmbientLight;
 
 /**
  * Created by hadri on 12/14/2015.
@@ -23,10 +24,13 @@ import com.colim.anglexplore.utils.Constants;
 public class StartScreen extends ScreenAdapter {
 
     private Stage stage;
+    private Texture anglesTexture;
+    private Texture titleTexture;
     private Texture playTexture;
     private Texture playPressTexture;
+
+
     private ImageButton play;
-    private Texture titleTexture;
     private final Game game;
 
     public StartScreen(Game game){
@@ -36,6 +40,17 @@ public class StartScreen extends ScreenAdapter {
     public void show(){
         stage = new Stage(new FitViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(stage);
+
+        titleTexture = new Texture("title.png");
+        Image title = new Image(titleTexture);
+        title.setPosition(Constants.WORLD_WIDTH /2, 7 * Constants.WORLD_HEIGHT / 8,
+                Align.center);
+        stage.addActor(title);
+
+        anglesTexture = new Texture("angles.png");
+        Image angles = new Image(anglesTexture);
+        angles.setPosition(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 3, Align.center);
+        stage.addActor(angles);
 
         playTexture = new Texture("tap_unpressed.png");
         playPressTexture = new
@@ -47,13 +62,6 @@ public class StartScreen extends ScreenAdapter {
         play.setPosition(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 4, Align.center);
 
         stage.addActor(play);
-
-        titleTexture = new Texture("title.png");
-        Image title = new Image(titleTexture);
-        title.setPosition(Constants.WORLD_WIDTH /2, 3 * Constants.WORLD_HEIGHT / 4,
-                Align.center);
-        stage.addActor(title);
-
 
         play.addListener(new ActorGestureListener() {
             @Override

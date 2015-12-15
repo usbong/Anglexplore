@@ -1,12 +1,16 @@
 package com.colim.anglexplore.stages;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ResolutionFileResolver;
 import com.badlogic.gdx.assets.loaders.resolvers.ResolutionFileResolver.*;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.colim.anglexplore.actors.GameAngle;
@@ -22,8 +26,11 @@ public class GameStage extends Stage {
 
     private ResolutionFileResolver fileResolver;
     private OrthographicCamera camera;
-    private GameAngle gameAngle;
-    private Point point;
+
+
+    private Texture generateTexture;
+    private Texture quitTexture;
+    private Texture answerTexture;
 
 
     public GameStage(){
@@ -31,11 +38,26 @@ public class GameStage extends Stage {
                 new Resolution(1280, 720, "720"), new Resolution(1920, 1080, "1080"));
         // use fileResolver for loading textures
         setupCamera();
-        setViewport(new StretchViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT));
-        point = new Point(new Vector2(Constants.WORLD_WIDTH/2,Constants.WORLD_HEIGHT/2));
+        setViewport(new FitViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT));
 
-        addActor(point);
-        setKeyboardFocus(point);
+        answerTexture = new Texture(Gdx.files.internal("answer.png"));
+        Image answer = new Image(answerTexture);
+        answer.setPosition(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/3, Align.center);
+
+        generateTexture = new Texture(Gdx.files.internal("generate.png"));
+        Image generate = new Image(generateTexture);
+        generate.setPosition(Constants.WORLD_WIDTH /3 + 20, Constants.WORLD_HEIGHT / 10,
+                Align.center);
+
+        quitTexture = new Texture(Gdx.files.internal("quit.png"));
+        Image quit = new Image(quitTexture);
+        quit.setPosition(5*Constants.WORLD_WIDTH /6 + 20, Constants.WORLD_HEIGHT / 10,
+                Align.center);
+
+
+        addActor(generate);
+        addActor(answer);
+        addActor(quit);
     }
 
     private void setupCamera() {
@@ -45,10 +67,18 @@ public class GameStage extends Stage {
     }
 
 
+    @Override
+    public void draw() {
+        super.draw();
+    }
 
     @Override
-    public void draw(){
-        super.draw();
-
+    public void dispose() {
+        super.dispose();
+        generateTexture.dispose();
+        quitTexture.dispose();
+        answerTexture.dispose();
     }
+
+
 }

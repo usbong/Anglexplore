@@ -5,11 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -27,6 +30,10 @@ public class StartScreen extends ScreenAdapter {
     private ImageButton play;
     private Texture titleTexture;
     private final Game game;
+
+    private FreeTypeFontGenerator generator;
+
+
 
     public StartScreen(Game game){
         this.game = game;
@@ -79,6 +86,7 @@ public class StartScreen extends ScreenAdapter {
         playTexture.dispose();
         playPressTexture.dispose();
         titleTexture.dispose();
+        generator.dispose();
     }
 
 

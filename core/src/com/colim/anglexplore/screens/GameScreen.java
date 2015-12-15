@@ -73,8 +73,8 @@ public class GameScreen extends ScreenAdapter {
     }
 
     private void clearScreen(){
-        Gdx.gl.glClearColor(Color.SKY.r, Color.SKY.g,
-                Color.SKY.b, Color.SKY.a);
+        Gdx.gl.glClearColor(70/255f, 157/255f,
+                214/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 

@@ -22,6 +22,7 @@ public class GameStage extends Stage {
     private OrthographicCamera camera;
     private GameAngle gameAngle;
     private Point point;
+    private Point point2;
 
 
     public GameStage(){
@@ -32,8 +33,10 @@ public class GameStage extends Stage {
         gameAngle = new GameAngle();
         point = new Point();
 
+        point2 = new Point(new Vector2(0, 0), Color.RED);
         addActor(gameAngle);
         addActor(point);
+        addActor(point2);
     }
 
     private void setupCamera() {

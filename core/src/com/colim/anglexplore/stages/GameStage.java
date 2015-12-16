@@ -7,9 +7,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.colim.anglexplore.actors.GameAngle;
 import com.colim.anglexplore.actors.GameUI;
-import com.colim.anglexplore.actors.Point;
 import com.colim.anglexplore.utils.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /*
@@ -24,7 +27,8 @@ public class GameStage extends Stage {
     private OrthographicCamera camera;
     private GameUI gameUI;
     private Texture pointTexture;
-    private Point point;
+    private Texture armTexture;
+    private List<GameAngle> angles;
 
     public GameStage(){
 
@@ -32,14 +36,16 @@ public class GameStage extends Stage {
                 new OrthographicCamera(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT)));
 
         setupCamera();
-
-
+        angles = new ArrayList<GameAngle>();
         pointTexture = new Texture(Gdx.files.internal("vertex.png"));
-        point = new Point(pointTexture, new Vector2(500,500));
+        armTexture = new Texture(Gdx.files.internal("arm.png"));
         gameUI = new GameUI();
         addActor(gameUI);
-        addActor(point);
 
+        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), 30));
+        for (GameAngle angle : angles) {
+            addActor(angle);
+        }
 
     }
 
@@ -54,5 +60,6 @@ public class GameStage extends Stage {
     public void dispose() {
         super.dispose();
         pointTexture.dispose();
+        armTexture.dispose();
     }
 }

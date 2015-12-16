@@ -13,13 +13,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.colim.anglexplore.utils.Constants;
 
-/**
- * Created by hadri on 12/14/2015.
+/*
+ * Created by Hadrian Paulo Lim on 2015.
+ *
+ * Copyright (c) Usbong Social Systems, Inc. All rights reserved.
  */
+
 public class StartScreen extends ScreenAdapter {
 
     private Stage stage;
@@ -37,24 +39,24 @@ public class StartScreen extends ScreenAdapter {
     }
 
     public void show(){
-        stage = new Stage(new FitViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT));
+        stage = new Stage(new StretchViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(stage);
 
-        titleTexture = new Texture("title.png");
+        titleTexture = new Texture(Gdx.files.internal("title.png"));
         Image title = new Image(titleTexture);
         title.setPosition(Constants.WORLD_WIDTH /2, 7 * Constants.WORLD_HEIGHT / 8,
                 Align.center);
         stage.addActor(title);
 
-        anglesTexture = new Texture("angles.png");
+        anglesTexture = new Texture(Gdx.files.internal("angles.png"));
         Image angles = new Image(anglesTexture);
         angles.setPosition(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 3, Align.center);
         stage.addActor(angles);
 
-        playTexture = new Texture("tap_unpressed.png");
+        playTexture = new Texture(Gdx.files.internal("tap_unpressed.png"));
 
         playPressTexture = new
-                Texture("tap_pressed.png");
+                Texture(Gdx.files.internal("tap_pressed.png"));
 
         play = new ImageButton(new TextureRegionDrawable(new
                 TextureRegion(playTexture)), new TextureRegionDrawable(new

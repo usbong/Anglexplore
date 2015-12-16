@@ -3,19 +3,14 @@ package com.colim.anglexplore.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.*;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.colim.anglexplore.stages.GameStage;
-import com.colim.anglexplore.utils.Constants;
 
-/**
- * Created by hadri on 12/13/2015.
+/*
+ * Created by Hadrian Paulo Lim on 2015.
+ *
+ * Copyright (c) Usbong Social Systems, Inc. All rights reserved.
  */
+
 public class GameScreen extends ScreenAdapter {
 
     private GameStage stage;
@@ -23,11 +18,12 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(){
         stage = new GameStage();
         Gdx.input.setInputProcessor(stage);
+
     }
 
     @Override
     public void show() {
-
+        super.show();
 
     }
 
@@ -40,6 +36,7 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
+
     }
 
     @Override

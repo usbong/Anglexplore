@@ -7,9 +7,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.colim.anglexplore.utils.Constants;
 
-/**
- * Created by hadri on 12/13/2015.
+/*
+ * Created by Hadrian Paulo Lim on 2015.
+ *
+ * Copyright (c) Usbong Social Systems, Inc. All rights reserved.
  */
+
 public class GameAngle extends Actor {
 
     private ShapeRenderer shapeRenderer;

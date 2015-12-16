@@ -1,7 +1,13 @@
 package com.colim.anglexplore;
 
+/*
+ * Created by Hadrian Paulo Lim on 2015.
+ *
+ * Copyright (c) Usbong Social Systems, Inc. All rights reserved.
+ */
+
+
 import com.badlogic.gdx.Game;
-import com.colim.anglexplore.screens.GameScreen;
 import com.colim.anglexplore.screens.StartScreen;
 
 public class AnglexploreGame extends Game {

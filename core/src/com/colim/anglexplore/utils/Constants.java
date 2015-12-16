@@ -1,8 +1,11 @@
 package com.colim.anglexplore.utils;
 
-/**
- * Created by hadri on 12/13/2015.
+/*
+ * Created by Hadrian Paulo Lim on 2015.
+ *
+ * Copyright (c) Usbong Social Systems, Inc. All rights reserved.
  */
+
 public class Constants {
     public enum GAME_STATE {
         PLAYING,
@@ -10,8 +13,8 @@ public class Constants {
         END
     }
 
-    public static final float WORLD_HEIGHT = 720; // height of 10 meters
-    public static final float WORLD_WIDTH = 1280; // width of 13 meters
+    public static final float WORLD_HEIGHT = 720f; // height of 10 meters
+    public static final float WORLD_WIDTH = 1280f; // width of 13 meters
     public static final int NANGLES = 6; // number of angles
 
 }

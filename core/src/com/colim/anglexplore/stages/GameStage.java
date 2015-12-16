@@ -42,7 +42,17 @@ public class GameStage extends Stage {
         gameUI = new GameUI();
         addActor(gameUI);
 
-        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), 30));
+        float angle_x = ((float) Math.random()) * 90f;
+        float angle_y = ((float) Math.random()) * 180f;
+
+        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), 90 - angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), 180-angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ),((float) Math.random()) * 180f));
+        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), ((float) Math.random()) * 180f));
+
+
         for (GameAngle angle : angles) {
             addActor(angle);
         }

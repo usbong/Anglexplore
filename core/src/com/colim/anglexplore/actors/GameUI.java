@@ -40,9 +40,9 @@ public class GameUI extends Group{
         generate = new Image(generateTexture);
         quit = new Image(quitTexture);
 
-        quit.setPosition(5*Constants.WORLD_WIDTH /6 + 20, Constants.WORLD_HEIGHT / 10, Align.center);
-        generate.setPosition(Constants.WORLD_WIDTH /3 + 20, Constants.WORLD_HEIGHT / 10, Align.center);
-        answer.setPosition(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/3, Align.center);
+        quit.setPosition(4*Constants.WORLD_WIDTH /5, Constants.WORLD_HEIGHT / 12, Align.center);
+        generate.setPosition(Constants.WORLD_WIDTH /3, Constants.WORLD_HEIGHT / 12, Align.center);
+        answer.setPosition(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/4, Align.center);
 
         addActor(generate);
         addActor(answer);

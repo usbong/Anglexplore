@@ -5,13 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.colim.anglexplore.utils.Constants;
@@ -28,10 +25,8 @@ public class StartScreen extends ScreenAdapter {
     private Texture anglesTexture;
     private Texture titleTexture;
     private Texture playTexture;
-    private Texture playPressTexture;
+    private Texture tutorialTexture;
 
-
-    private ImageButton play;
     private Game game;
 
     public StartScreen(Game game){
@@ -44,7 +39,7 @@ public class StartScreen extends ScreenAdapter {
 
         titleTexture = new Texture(Gdx.files.internal("title.png"));
         Image title = new Image(titleTexture);
-        title.setPosition(Constants.WORLD_WIDTH /2, 7 * Constants.WORLD_HEIGHT / 8,
+        title.setPosition(Constants.WORLD_WIDTH /2, 4 * Constants.WORLD_HEIGHT / 5,
                 Align.center);
         stage.addActor(title);
 
@@ -54,26 +49,31 @@ public class StartScreen extends ScreenAdapter {
         stage.addActor(angles);
 
         playTexture = new Texture(Gdx.files.internal("tap_unpressed.png"));
+        Image play = new Image(playTexture);
 
-        playPressTexture = new
-                Texture(Gdx.files.internal("tap_pressed.png"));
-
-        play = new ImageButton(new TextureRegionDrawable(new
-                TextureRegion(playTexture)), new TextureRegionDrawable(new
-                TextureRegion(playPressTexture)));
-        play.setPosition(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 4, Align.center);
-
+        play.setPosition(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 3, Align.center);
         stage.addActor(play);
 
-        play.addListener(new ActorGestureListener() {
+        stage.addListener(new ActorGestureListener() {
             @Override
             public void tap(InputEvent event, float x, float y, int count,
                             int button) {
                 super.tap(event, x, y, count, button);
-                game.setScreen(new com.colim.anglexplore.screens.GameScreen());
-                dispose();
+                if(tutorialTexture == null) {
+                    playTexture.dispose();
+                    tutorialTexture = new Texture(Gdx.files.internal("tutorial.png"));
+                    Image tutorial = new Image(tutorialTexture);
+                    tutorial.setPosition(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 3, Align.center);
+                    stage.addActor(tutorial);
+                }
+                else{
+                    game.setScreen(new com.colim.anglexplore.screens.GameScreen());
+                    dispose();
+                }
             }
         });
+
+
     }
 
     public void resize(int width, int height) {
@@ -87,15 +87,15 @@ public class StartScreen extends ScreenAdapter {
 
     public void dispose(){
         stage.dispose();
-        playTexture.dispose();
-        playPressTexture.dispose();
         titleTexture.dispose();
+        anglesTexture.dispose();
+        tutorialTexture.dispose();
     }
 
 
     private void clearScreen(){
         Gdx.gl.glClearColor(70/255f, 157/255f,
-                214/255f, 1); //Skyblue
+                214/255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 

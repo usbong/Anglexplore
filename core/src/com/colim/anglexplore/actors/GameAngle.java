@@ -23,16 +23,20 @@ public class GameAngle extends Group {
         arm = new Arm(armTexture, randomAngle);
         arm2 = new Arm(armTexture, randomAngle+angle);
 
-        // For referencing of point position
-        arm.setReferences(point);
-        arm2.setReferences(point);
-
         addActor(point);
         addActor(arm);
         addActor(arm2);
     }
 
-
+    @Override
+    public void act(float delta) {
+        float armPosX = point.getX() + point.getWidth() / 2;
+        float armPosY = point.getY() + point.getHeight() / 2;
+        super.act(delta);
+        arm.setPosition(armPosX, armPosY);
+        arm2.setPosition(armPosX, armPosY);
+        
+    }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {

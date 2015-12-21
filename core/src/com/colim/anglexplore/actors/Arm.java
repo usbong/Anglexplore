@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
  */
 public class Arm  extends Image {
 
-    private Point point;
     private float rotateAngle;
     private float startAngle;
 
@@ -27,10 +26,6 @@ public class Arm  extends Image {
 
         startAngle = rotateAngle = angle;
         addListener(dragListener);
-    }
-
-    public void setReferences(Point point){
-        this.point = point;
     }
 
     DragListener dragListener = new DragListener() {
@@ -49,7 +44,6 @@ public class Arm  extends Image {
     @Override
     public void act(float delta) {
         setRotation(rotateAngle);
-        setPosition(point.getX() + point.getWidth()/2, point.getY() + point.getHeight()/2);
 
         super.act(delta);
     }

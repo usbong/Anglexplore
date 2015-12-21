@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.colim.anglexplore.utils.Constants;
 
 /*
@@ -31,6 +33,13 @@ public class GameAngle extends Group {
         addActor(point);
         addActor(arm);
         addActor(arm2);
+
+//        setBounds();
+        addListener(new DragListener() {
+            public void drag(InputEvent event, float x, float y, int pointer) {
+                moveBy(x, y);
+            }
+        });
     }
 
     @Override

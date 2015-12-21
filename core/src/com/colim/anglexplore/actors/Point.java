@@ -20,8 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
 public class Point extends Image {
 
-    private Vector2 position;
-
     public Point(Texture texture, Vector2 position) {
         super(texture);
         setBounds(getX(), getY(), getWidth(), getHeight());
@@ -39,7 +37,6 @@ public class Point extends Image {
     DragListener dragListener = new DragListener() {
         private float startDragX, startDragY;
 
-        @Override
         public void dragStart(InputEvent event, float x, float y, int pointer) {
             startDragX = x;
             startDragY = y;
@@ -47,7 +44,6 @@ public class Point extends Image {
 
         public void drag(InputEvent event, float x, float y, int pointer) {
             moveBy(x - startDragX, y - startDragY);
-            System.out.println(getX());
         }
     };
 }

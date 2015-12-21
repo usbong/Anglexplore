@@ -26,20 +26,16 @@ public class GameAngle extends Group {
     public GameAngle(Texture pointTexture, Texture armTexture, Vector2 position, float angle){ //Vector2 vertex, float angle
         // create angle here
         point = new Point(pointTexture, position);
-        arm = new Arm(armTexture,
-                new Vector2(point.getX() + point.getWidth()/2 , point.getY() + point.getHeight()/2), randomAngle);
-        arm2 = new Arm(armTexture,
-                new Vector2(point.getX() + point.getWidth()/2 , point.getY() + point.getHeight()/2), randomAngle-angle);
+        arm = new Arm(armTexture, randomAngle);
+        arm2 = new Arm(armTexture, randomAngle-angle);
+
+        // For referencing of point position
+        arm.setPoint(point);
+        arm2.setPoint(point);
+
         addActor(point);
         addActor(arm);
         addActor(arm2);
-
-//        setBounds();
-        addListener(new DragListener() {
-            public void drag(InputEvent event, float x, float y, int pointer) {
-                moveBy(x, y);
-            }
-        });
     }
 
     @Override

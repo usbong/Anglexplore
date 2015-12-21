@@ -32,6 +32,7 @@ public class GameScreen extends ScreenAdapter {
         clearScreen();
         stage.act(delta);
         stage.draw();
+
     }
 
     @Override

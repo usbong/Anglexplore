@@ -16,17 +16,24 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public class Arm  extends Image {
 
     private Vector2 position;
+    private Point point;
 
-    public Arm(Texture texture, Vector2 position, float angle) {
+    public Arm(Texture texture, float angle) {
         super(texture);
         setBounds(getX(), getY(), getWidth(), getHeight());
-        setPosition(position.x, position.y);
         setRotation(angle);
     }
 
+    public void setPoint(Point point){
+        this.point = point;
+    }
 
     @Override
     public void act(float delta) {
+        setPosition(point.getX() + point.getWidth()/2, point.getY() + point.getHeight()/2);
         super.act(delta);
+
     }
+
+
 }

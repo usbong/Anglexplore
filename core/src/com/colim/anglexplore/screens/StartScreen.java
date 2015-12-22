@@ -78,6 +78,7 @@ public class StartScreen extends ScreenAdapter {
     }
 
     public void render(float delta) {
+        clearScreen();
         stage.act(delta);
         stage.draw();
     }
@@ -86,4 +87,12 @@ public class StartScreen extends ScreenAdapter {
         stage.dispose();
         AssetLoaderStart.dispose();
     }
+
+
+    private void clearScreen(){
+        Gdx.gl.glClearColor(255f, 255f,
+                255f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
+
 }

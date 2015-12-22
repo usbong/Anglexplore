@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.*;
 import com.colim.anglexplore.stages.GameStage;
+import com.colim.anglexplore.utils.AssetLoaderGame;
+import com.colim.anglexplore.utils.AssetLoaderUI;
 
 /*
  * Created by Hadrian Paulo Lim on 2015.
@@ -18,13 +20,11 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(){
         stage = new GameStage();
         Gdx.input.setInputProcessor(stage);
-
     }
 
     @Override
     public void show() {
         super.show();
-
     }
 
     @Override
@@ -32,7 +32,6 @@ public class GameScreen extends ScreenAdapter {
         clearScreen();
         stage.act(delta);
         stage.draw();
-
     }
 
     @Override
@@ -57,13 +56,14 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
+
         stage.dispose();
+        AssetLoaderGame.dispose();
+        AssetLoaderUI.dispose();
     }
 
     private void clearScreen(){
-        Gdx.gl.glClearColor(70/255f, 157/255f,
-                214/255f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
     }
 
 }

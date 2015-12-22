@@ -37,8 +37,10 @@ public class GameStage extends Stage {
 
         setupCamera();
         angles = new ArrayList<GameAngle>();
+
         pointTexture = new Texture(Gdx.files.internal("vertex.png"));
         armTexture = new Texture(Gdx.files.internal("arm.png"));
+
         gameUI = new GameUI();
         addActor(gameUI);
 

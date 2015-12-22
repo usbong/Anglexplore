@@ -4,13 +4,14 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.colim.anglexplore.utils.AssetLoaderStart;
 import com.colim.anglexplore.utils.Constants;
 
 /*
@@ -22,10 +23,8 @@ import com.colim.anglexplore.utils.Constants;
 public class StartScreen extends ScreenAdapter {
 
     private Stage stage;
-    private Texture anglesTexture;
-    private Texture titleTexture;
-    private Texture playTexture;
-    private Texture tutorialTexture;
+    private TextureRegion startScreenTexture, tapToContinueTexture, tutorialTexture;
+
 
     private Game game;
 
@@ -34,25 +33,21 @@ public class StartScreen extends ScreenAdapter {
     }
 
     public void show(){
+        AssetLoaderStart.load();
+
         stage = new Stage(new StretchViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT));
         Gdx.input.setInputProcessor(stage);
 
-        titleTexture = new Texture(Gdx.files.internal("title.png"));
-        Image title = new Image(titleTexture);
-        title.setPosition(Constants.WORLD_WIDTH /2, 4 * Constants.WORLD_HEIGHT / 5,
-                Align.center);
-        stage.addActor(title);
+        startScreenTexture = AssetLoaderStart.screen_start;
+        tapToContinueTexture = AssetLoaderStart.tap_to_continue;
 
-        anglesTexture = new Texture(Gdx.files.internal("angles.png"));
-        Image angles = new Image(anglesTexture);
-        angles.setPosition(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 3, Align.center);
-        stage.addActor(angles);
+        Image startScreen = new Image(startScreenTexture);
+        final Image tapToContinue = new Image(tapToContinueTexture);
 
-        playTexture = new Texture(Gdx.files.internal("tap_unpressed.png"));
-        Image play = new Image(playTexture);
+        tapToContinue.setPosition(2 * Constants.WORLD_WIDTH / 3, Constants.WORLD_HEIGHT / 3, Align.center);
 
-        play.setPosition(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 3, Align.center);
-        stage.addActor(play);
+        stage.addActor(startScreen);
+        stage.addActor(tapToContinue);
 
         stage.addListener(new ActorGestureListener() {
             @Override
@@ -60,11 +55,14 @@ public class StartScreen extends ScreenAdapter {
                             int button) {
                 super.tap(event, x, y, count, button);
                 if(tutorialTexture == null) {
-                    playTexture.dispose();
-                    tutorialTexture = new Texture(Gdx.files.internal("tutorial.png"));
+                    tutorialTexture = AssetLoaderStart.screen_instructions;
+
                     Image tutorial = new Image(tutorialTexture);
-                    tutorial.setPosition(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 3, Align.center);
+                    tapToContinue.setPosition(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 3, Align.center);
+
                     stage.addActor(tutorial);
+                    stage.addActor(tapToContinue);
+
                 }
                 else{
                     game.setScreen(new com.colim.anglexplore.screens.GameScreen());
@@ -73,30 +71,19 @@ public class StartScreen extends ScreenAdapter {
             }
         });
 
-
     }
 
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
+
     public void render(float delta) {
-        clearScreen();
         stage.act(delta);
         stage.draw();
     }
 
     public void dispose(){
         stage.dispose();
-        titleTexture.dispose();
-        anglesTexture.dispose();
-        tutorialTexture.dispose();
+        AssetLoaderStart.dispose();
     }
-
-
-    private void clearScreen(){
-        Gdx.gl.glClearColor(70/255f, 157/255f,
-                214/255f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    }
-
 }

@@ -9,9 +9,11 @@ package com.colim.anglexplore.actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.utils.Align;
+import com.colim.anglexplore.utils.AssetLoaderUI;
 import com.colim.anglexplore.utils.Constants;
 
 /*
@@ -23,31 +25,31 @@ import com.colim.anglexplore.utils.Constants;
 
 public class GameUI extends Group{
 
-    private Texture generateTexture;
-    private Texture quitTexture;
-    private Texture answerTexture;
-    private Image answer;
-    private Image generate;
-    private Image quit;
+    private TextureRegion bgTexture, generateTexture, quitTexture, textBoxTexture;
+    private Image bg, textBox, generate, quit;
 
     public GameUI() {
         super();
-        answerTexture = new Texture(Gdx.files.internal("answer.png"));
-        generateTexture = new Texture(Gdx.files.internal("generate.png"));
-        quitTexture = new Texture(Gdx.files.internal("quit.png"));
 
-        answer = new Image(answerTexture);
+        AssetLoaderUI.load();
+        bgTexture = AssetLoaderUI.bg;
+        textBoxTexture = AssetLoaderUI.text_box;
+        generateTexture = AssetLoaderUI.button_generate;
+        quitTexture = AssetLoaderUI.button_quit;
+
+        bg = new Image(bgTexture);
+        textBox = new Image(textBoxTexture);
         generate = new Image(generateTexture);
         quit = new Image(quitTexture);
 
         quit.setPosition(4*Constants.WORLD_WIDTH /5, Constants.WORLD_HEIGHT / 12, Align.center);
         generate.setPosition(Constants.WORLD_WIDTH /3, Constants.WORLD_HEIGHT / 12, Align.center);
-        answer.setPosition(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/4, Align.center);
+        textBox.setPosition(Constants.WORLD_WIDTH/2, Constants.WORLD_HEIGHT/4, Align.center);
 
+        addActor(bg);
         addActor(generate);
-        addActor(answer);
+        addActor(textBox);
         addActor(quit);
-
     }
 
     @Override

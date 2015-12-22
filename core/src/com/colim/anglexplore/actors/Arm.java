@@ -44,7 +44,6 @@ public class Arm  extends Image {
     @Override
     public void act(float delta) {
         setRotation(rotateAngle);
-
         super.act(delta);
     }
 }

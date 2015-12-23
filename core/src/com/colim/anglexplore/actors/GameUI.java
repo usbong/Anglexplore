@@ -11,7 +11,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.colim.anglexplore.utils.AssetLoaderUI;
 import com.colim.anglexplore.utils.Constants;
@@ -26,7 +28,7 @@ import com.colim.anglexplore.utils.Constants;
 public class GameUI extends Group{
 
     private TextureRegion bgTexture, generateTexture, quitTexture, textBoxTexture;
-    private Image bg, textBox, generate, quit;
+    public Image bg, textBox, generate, quit;
 
     public GameUI() {
         super();
@@ -50,6 +52,7 @@ public class GameUI extends Group{
         addActor(generate);
         addActor(textBox);
         addActor(quit);
+
     }
 
     @Override

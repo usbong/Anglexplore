@@ -17,33 +17,36 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
  */
 public class Arm  extends Image {
 
-    private float rotateAngle;
-    private float startAngle;
+    private float currentAngle;
+
 
     public Arm(Texture texture, float angle) {
         super(texture);
         setBounds(getX(), getY(), getWidth(), getHeight());
 
-        startAngle = rotateAngle = angle;
+        currentAngle = angle;
         addListener(dragListener);
     }
 
     DragListener dragListener = new DragListener() {
-        private float startDragX;
 
         @Override
         public void dragStart(InputEvent event, float x, float y, int pointer) {
-            startDragX = x;
+
         }
 
         public void drag(InputEvent event, float x, float y, int pointer) {
-            rotateAngle = startAngle + x - startDragX;
+
         }
     };
 
+    public void newRotation(float angle){
+        currentAngle = angle;
+    }
+
     @Override
     public void act(float delta) {
-        setRotation(rotateAngle);
+        setRotation(currentAngle);
         super.act(delta);
     }
 }

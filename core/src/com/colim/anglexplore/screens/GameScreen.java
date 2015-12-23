@@ -56,7 +56,7 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void dispose() {
-
+        super.dispose();
         stage.dispose();
         AssetLoaderGame.dispose();
         AssetLoaderUI.dispose();

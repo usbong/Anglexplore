@@ -16,6 +16,7 @@ public class GameAngle extends Group {
     private Point point;
     private Arm arm, arm2;
     private float randomAngle =  ((float) Math.random() * 360f);
+    private Vector2 position;
 
     public GameAngle(Texture pointTexture, Texture armTexture, Vector2 position, float angle){ //Vector2 vertex, float angle
         // create angle here
@@ -26,6 +27,17 @@ public class GameAngle extends Group {
         addActor(point);
         addActor(arm);
         addActor(arm2);
+        this.position = position;
+    }
+
+    public void resetPosition() {
+        point.setPosition(position.x, position.y);
+    }
+
+    public void newRotation(float angle){
+        float randomAngle =  ((float) Math.random() * 360f);
+        arm.newRotation(randomAngle);
+        arm2.newRotation(randomAngle + angle);
     }
 
     @Override

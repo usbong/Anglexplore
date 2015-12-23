@@ -24,8 +24,7 @@ public class GameAngle extends Group {
     private Image label;
     private DragListener dragArmListener;
 
-    public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion labelTexture, Vector2 position, float angle){ //Vector2 vertex, float angle
-        // create angle here
+    public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion labelTexture, Vector2 position, float angle){
         point = new Point(pointTexture, position);
         arm = new Arm(armTexture, randomAngle);
         arm2 = new Arm(armTexture, randomAngle+angle);
@@ -36,26 +35,7 @@ public class GameAngle extends Group {
         addActor(arm2);
         this.position = position;
 
-        dragArmListener = new DragListener() {
-
-            private Vector2 startPoint, draggingPoint;
-            private float deltaAngle;
-
-            @Override
-            public void dragStart(InputEvent event, float x, float y, int pointer) {
-                startPoint = new Vector2(arm.getImageX(), arm.getImageY());
-            }
-
-            public void drag(InputEvent event, float x, float y, int pointer) {
-                draggingPoint = new Vector2(x, y).sub(startPoint);
-                deltaAngle = MathUtils.atan2(draggingPoint.y, draggingPoint.x) * MathUtils.radiansToDegrees;
-                arm2.rotateBy(deltaAngle);
-                arm.rotateBy(deltaAngle);
-            }
-        };
-
-        arm.addListener(dragArmListener);
-        arm2.addListener(dragArmListener);
+        setupArmListener();
 
     }
 
@@ -83,5 +63,28 @@ public class GameAngle extends Group {
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
         label.draw(batch, parentAlpha);
+    }
+
+    public void setupArmListener(){
+        dragArmListener = new DragListener() {
+
+            private Vector2 startPoint, draggingPoint;
+            private float deltaAngle;
+
+            @Override
+            public void dragStart(InputEvent event, float x, float y, int pointer) {
+                startPoint = new Vector2(arm.getImageX(), arm.getImageY());
+            }
+
+            public void drag(InputEvent event, float x, float y, int pointer) {
+                draggingPoint = new Vector2(x, y).sub(startPoint);
+                deltaAngle = MathUtils.atan2(draggingPoint.y, draggingPoint.x) * MathUtils.radiansToDegrees;
+                arm2.rotateBy(deltaAngle);
+                arm.rotateBy(deltaAngle);
+            }
+        };
+
+        arm.addListener(dragArmListener);
+        arm2.addListener(dragArmListener);
     }
 }

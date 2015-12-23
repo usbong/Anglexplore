@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
 /*
@@ -22,7 +23,7 @@ public class GameAngle extends Group {
     private float randomAngle =  ((float) Math.random() * 360f);
     private Vector2 position;
     private Image label;
-    private DragListener dragArmListener;
+    private ClickListener clickArmListener;
 
     public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion labelTexture, Vector2 position, float angle){
         point = new Point(pointTexture, position);
@@ -66,25 +67,16 @@ public class GameAngle extends Group {
     }
 
     public void setupArmListener(){
-        dragArmListener = new DragListener() {
-
-            private Vector2 startPoint, draggingPoint;
-            private float deltaAngle;
-
+        clickArmListener = new ClickListener() {
             @Override
-            public void dragStart(InputEvent event, float x, float y, int pointer) {
-                startPoint = new Vector2(arm.getImageX(), arm.getImageY());
-            }
-
-            public void drag(InputEvent event, float x, float y, int pointer) {
-                draggingPoint = new Vector2(x, y).sub(startPoint);
-                deltaAngle = MathUtils.atan2(draggingPoint.y, draggingPoint.x) * MathUtils.radiansToDegrees;
-                arm2.rotateBy(deltaAngle);
-                arm.rotateBy(deltaAngle);
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                arm2.rotateBy(90);
+                arm.rotateBy(90);
+                return super.touchDown(event, x, y, pointer, button);
             }
         };
 
-        arm.addListener(dragArmListener);
-        arm2.addListener(dragArmListener);
+        arm.addListener(clickArmListener);
+        arm2.addListener(clickArmListener);
     }
 }

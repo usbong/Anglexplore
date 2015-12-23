@@ -1,9 +1,10 @@
 package com.colim.anglexplore.actors;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 /*
  * Created by Hadrian Paulo Lim on 2015.
@@ -17,12 +18,14 @@ public class GameAngle extends Group {
     private Arm arm, arm2;
     private float randomAngle =  ((float) Math.random() * 360f);
     private Vector2 position;
+    private Image label;
 
-    public GameAngle(Texture pointTexture, Texture armTexture, Vector2 position, float angle){ //Vector2 vertex, float angle
+    public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion labelTexture, Vector2 position, float angle){ //Vector2 vertex, float angle
         // create angle here
         point = new Point(pointTexture, position);
         arm = new Arm(armTexture, randomAngle);
         arm2 = new Arm(armTexture, randomAngle+angle);
+        label = new Image(labelTexture);
 
         addActor(point);
         addActor(arm);
@@ -47,11 +50,12 @@ public class GameAngle extends Group {
         super.act(delta);
         arm.setPosition(armPosX, armPosY);
         arm2.setPosition(armPosX, armPosY);
-        
+        label.setPosition(point.getX() + 8 * point.getWidth()/7, point.getY() + 8 * point.getHeight() / 7 );
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
+        label.draw(batch, parentAlpha);
     }
 }

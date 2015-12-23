@@ -7,6 +7,7 @@
 package com.colim.anglexplore.actors;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -20,7 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
 public class Point extends Image {
 
-    public Point(Texture texture, Vector2 position) {
+    public Point(TextureRegion texture, Vector2 position) {
         super(texture);
         setBounds(getX(), getY(), getWidth(), getHeight());
         setPosition(position.x, position.y);

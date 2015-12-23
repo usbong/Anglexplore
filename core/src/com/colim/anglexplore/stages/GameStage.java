@@ -1,23 +1,18 @@
 package com.colim.anglexplore.stages;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.loaders.resolvers.ResolutionFileResolver;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.colim.anglexplore.actors.GameAngle;
 import com.colim.anglexplore.actors.GameUI;
+import com.colim.anglexplore.utils.AssetLoaderGame;
 import com.colim.anglexplore.utils.Constants;
 
-import java.security.AccessControlContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +25,11 @@ import java.util.List;
 
 public class GameStage extends Stage {
 
-    private ResolutionFileResolver fileResolver;
     private OrthographicCamera camera;
     private GameUI gameUI;
-    private Texture pointTexture;
-    private Texture armTexture;
+    private TextureRegion pointTexture;
+    private TextureRegion armTexture;
+    private List<TextureRegion> lettersTexture;
     private List<GameAngle> angles;
 
     public GameStage(){
@@ -44,8 +39,10 @@ public class GameStage extends Stage {
 
         setupCamera();
 
-        pointTexture = new Texture(Gdx.files.internal("vertex.png"));
-        armTexture = new Texture(Gdx.files.internal("arm.png"));
+        AssetLoaderGame.load();
+        pointTexture = AssetLoaderGame.vertex;
+        armTexture = AssetLoaderGame.arm;
+        lettersTexture = AssetLoaderGame.letters;
 
         gameUI = new GameUI();
         addActor(gameUI);
@@ -78,12 +75,10 @@ public class GameStage extends Stage {
         camera.update();
     }
 
-
     @Override
     public void dispose() {
         super.dispose();
-        pointTexture.dispose();
-        armTexture.dispose();
+        AssetLoaderGame.dispose();
     }
 
     public void generateGameAngles(List<GameAngle> angles){
@@ -91,13 +86,12 @@ public class GameStage extends Stage {
         float angle_x = ((float) Math.random()) * 90f;
         float angle_y = ((float) Math.random()) * 180f;
 
-        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), 90 - angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), 180-angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ),((float) Math.random()) * 180f));
-        angles.add(new GameAngle(pointTexture, armTexture, new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), ((float) Math.random()) * 180f));
-
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(0), new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(1), new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), 90 - angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(2), new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(3), new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), 180-angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(4), new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ),((float) Math.random()) * 180f));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(5), new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), ((float) Math.random()) * 180f));
 
         for (GameAngle angle : angles) {
             addActor(angle);
@@ -118,9 +112,5 @@ public class GameStage extends Stage {
         angles.get(3).newRotation(180 - angle_y);
         angles.get(4).newRotation(((float) Math.random()) * 180f);
         angles.get(5).newRotation(((float) Math.random()) * 180f);
-
     }
-
-
-
 }

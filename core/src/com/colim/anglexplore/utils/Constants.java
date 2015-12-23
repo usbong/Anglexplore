@@ -7,14 +7,8 @@ package com.colim.anglexplore.utils;
  */
 
 public class Constants {
-    public enum GAME_STATE {
-        PLAYING,
-        START,
-        END
-    }
 
     public static final float WORLD_HEIGHT = 720f; // height of 10 meters
     public static final float WORLD_WIDTH = 1280f; // width of 13 meters
-    public static final int NANGLES = 6; // number of angles
 
 }

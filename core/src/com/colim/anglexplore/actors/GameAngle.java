@@ -2,9 +2,12 @@ package com.colim.anglexplore.actors;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
 /*
  * Created by Hadrian Paulo Lim on 2015.
@@ -19,6 +22,7 @@ public class GameAngle extends Group {
     private float randomAngle =  ((float) Math.random() * 360f);
     private Vector2 position;
     private Image label;
+    private DragListener dragArmListener;
 
     public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion labelTexture, Vector2 position, float angle){ //Vector2 vertex, float angle
         // create angle here
@@ -31,6 +35,28 @@ public class GameAngle extends Group {
         addActor(arm);
         addActor(arm2);
         this.position = position;
+
+        dragArmListener = new DragListener() {
+
+            private Vector2 startPoint, draggingPoint;
+            private float deltaAngle;
+
+            @Override
+            public void dragStart(InputEvent event, float x, float y, int pointer) {
+                startPoint = new Vector2(arm.getImageX(), arm.getImageY());
+            }
+
+            public void drag(InputEvent event, float x, float y, int pointer) {
+                draggingPoint = new Vector2(x, y).sub(startPoint);
+                deltaAngle = MathUtils.atan2(draggingPoint.y, draggingPoint.x) * MathUtils.radiansToDegrees;
+                arm2.rotateBy(deltaAngle);
+                arm.rotateBy(deltaAngle);
+            }
+        };
+
+        arm.addListener(dragArmListener);
+        arm2.addListener(dragArmListener);
+
     }
 
     public void resetPosition() {
@@ -39,8 +65,8 @@ public class GameAngle extends Group {
 
     public void newRotation(float angle){
         float randomAngle =  ((float) Math.random() * 360f);
-        arm.newRotation(randomAngle);
-        arm2.newRotation(randomAngle + angle);
+        arm.setRotation(randomAngle);
+        arm2.setRotation(randomAngle + angle);
     }
 
     @Override
@@ -50,7 +76,7 @@ public class GameAngle extends Group {
         super.act(delta);
         arm.setPosition(armPosX, armPosY);
         arm2.setPosition(armPosX, armPosY);
-        label.setPosition(point.getX() + 8 * point.getWidth()/7, point.getY() + 8 * point.getHeight() / 7 );
+        label.setPosition(point.getX() + 8 * point.getWidth()/4, point.getY() + 5 * point.getHeight() / 4 );
     }
 
     @Override

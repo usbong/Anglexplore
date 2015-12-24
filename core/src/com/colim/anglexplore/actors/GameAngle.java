@@ -29,7 +29,7 @@ public class GameAngle extends Group {
     private Vector2 startPoint, draggingPoint;
     private float deltaAngle;
 
-    private float accumulatedDeltaAngle;
+//    private float accumulatedDeltaAngle;
 
     public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion labelTexture, Vector2 position, float angle){
         point = new Point(pointTexture, position);
@@ -49,17 +49,23 @@ public class GameAngle extends Group {
 
     }
 
-    public Vector2 getPosition() {
+    public Vector2 getPointPosition() {
         return point.getCurPos();
     }
 
     public float getInitialAngle() {
-        return (randomAngle + accumulatedDeltaAngle) % 360;
+//        return (randomAngle + accumulatedDeltaAngle) % 360;
+        return arm.getRotation() % 360;
     }
 
+
     public float getTerminalAngle() {
-        return (randomAngle + angle + accumulatedDeltaAngle) % 360;
+
+//        return (randomAngle + angle + accumulatedDeltaAngle) % 360;
+//        Gdx.app.log("arm2", String.valueOf(arm2.getRotation()));
+        return arm2.getRotation() % 360;
     }
+
 
     public void resetPosition() {
         point.setPosition(position.x, position.y);
@@ -97,10 +103,8 @@ public class GameAngle extends Group {
             public void drag(InputEvent event, float x, float y, int pointer) {
                 draggingPoint = new Vector2(x, y).sub(startPoint);
                 deltaAngle = MathUtils.atan2(draggingPoint.y, draggingPoint.x) * MathUtils.radiansToDegrees;
-                accumulatedDeltaAngle += deltaAngle;
-                arm2.rotateBy(deltaAngle);
                 arm.rotateBy(deltaAngle);
-
+                arm2.rotateBy(deltaAngle);
             }
         };
 

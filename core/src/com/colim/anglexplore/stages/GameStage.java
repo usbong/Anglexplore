@@ -107,6 +107,7 @@ public class GameStage extends Stage {
         angles.get(5).newRotation(((float) Math.random()) * 180f);
     }
 
+    // Checks if two angles have a considerable angle difference to be considered collision
     public boolean validAngleDiff(float val1, float val2) {
         if( Math.abs(val2 - val1) < 5 ) {
             return true;
@@ -114,6 +115,7 @@ public class GameStage extends Stage {
         return false;
     }
 
+    // Checks if two points/vertices have considerable distance to be considered collision
     public boolean validPointDistance(Vector2 pos1, Vector2 pos2) {
         if(pos1.dst(pos2) < 5) {
             return true;
@@ -122,33 +124,16 @@ public class GameStage extends Stage {
     }
 
     public void checkCollision(List <GameAngle> angles){
-        for(int angleCurrentIndex = 0; angleCurrentIndex < angles.size(); angleCurrentIndex++){
-            for(int angleAgainstIndex = 0; angleAgainstIndex < angles.size(); angleAgainstIndex++){
+        for(int angleCurrentIndex = 0; angleCurrentIndex < angles.size(); angleCurrentIndex++) {
+            for(int angleAgainstIndex = angleCurrentIndex+1; angleAgainstIndex < angles.size(); angleAgainstIndex++) {
+
                 GameAngle currentAngle = angles.get(angleCurrentIndex);
                 GameAngle againstAngle = angles.get(angleAgainstIndex);
 
-                if( validPointDistance(currentAngle.getPosition(), againstAngle.getPosition()) &&
+                if( validPointDistance(currentAngle.getPointPosition(), againstAngle.getPointPosition()) &&
                         (validAngleDiff(currentAngle.getInitialAngle(), againstAngle.getTerminalAngle()) ||
-                                validAngleDiff(currentAngle.getTerminalAngle(), againstAngle.getInitialAngle())) &&
-                        angleCurrentIndex != angleAgainstIndex) {
-
+                                validAngleDiff(currentAngle.getTerminalAngle(), againstAngle.getInitialAngle()))) {
                     Gdx.app.log("Collision", "POINT AND ANGLE COLLISION!");
-                }
-                else if ( validPointDistance(currentAngle.getPosition(), againstAngle.getPosition()) && (angleCurrentIndex != angleAgainstIndex)) {
-                    Gdx.app.log("Point collision", String.valueOf(angleCurrentIndex));
-                    Gdx.app.log("Point collision", String.valueOf(angleAgainstIndex));
-                    Gdx.app.log("Point collision", "POINT COLLISION");
-                }
-                else if(validAngleDiff(currentAngle.getInitialAngle(), againstAngle.getTerminalAngle()) && angleCurrentIndex != angleAgainstIndex){
-                    Gdx.app.log("Angle collision", "ANGLE COLLISION");
-                    Gdx.app.log("Angle collision curr", String.valueOf(currentAngle.getInitialAngle()));
-                    Gdx.app.log("Angle collision term", String.valueOf(currentAngle.getTerminalAngle()));
-
-                }
-                else if(angleCurrentIndex != angleAgainstIndex){
-                    Gdx.app.log("current", String.valueOf(currentAngle.getInitialAngle()));
-                    Gdx.app.log("against", String.valueOf(againstAngle.getTerminalAngle()));
-                    Gdx.app.log("Dist", String.valueOf(Math.abs(currentAngle.getInitialAngle() - againstAngle.getTerminalAngle())));
                 }
             }
         }

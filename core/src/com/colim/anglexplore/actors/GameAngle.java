@@ -1,5 +1,6 @@
 package com.colim.anglexplore.actors;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -20,9 +21,15 @@ public class GameAngle extends Group {
     private Point point;
     private Arm arm, arm2;
     private float randomAngle =  ((float) Math.random() * 360f);
+    private float angle;
     private Vector2 position;
     private Image label;
     private DragListener dragArmListener;
+
+    private Vector2 startPoint, draggingPoint;
+    private float deltaAngle;
+
+    private float accumulatedDeltaAngle;
 
     public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion labelTexture, Vector2 position, float angle){
         point = new Point(pointTexture, position);
@@ -33,10 +40,25 @@ public class GameAngle extends Group {
         addActor(point);
         addActor(arm);
         addActor(arm2);
+
+        this.angle = angle;
         this.position = position;
+        this.deltaAngle = 0; // no additional rotation yet
 
         setupArmListener();
 
+    }
+
+    public Vector2 getPosition() {
+        return point.getCurPos();
+    }
+
+    public float getInitialAngle() {
+        return (randomAngle + accumulatedDeltaAngle) % 360;
+    }
+
+    public float getTerminalAngle() {
+        return (randomAngle + angle + accumulatedDeltaAngle) % 360;
     }
 
     public void resetPosition() {
@@ -67,10 +89,6 @@ public class GameAngle extends Group {
 
     public void setupArmListener(){
         dragArmListener = new DragListener() {
-
-            private Vector2 startPoint, draggingPoint;
-            private float deltaAngle;
-
             @Override
             public void dragStart(InputEvent event, float x, float y, int pointer) {
                 startPoint = new Vector2(arm.getImageX(), arm.getImageY());
@@ -79,12 +97,15 @@ public class GameAngle extends Group {
             public void drag(InputEvent event, float x, float y, int pointer) {
                 draggingPoint = new Vector2(x, y).sub(startPoint);
                 deltaAngle = MathUtils.atan2(draggingPoint.y, draggingPoint.x) * MathUtils.radiansToDegrees;
+                accumulatedDeltaAngle += deltaAngle;
                 arm2.rotateBy(deltaAngle);
                 arm.rotateBy(deltaAngle);
+
             }
         };
 
         arm.addListener(dragArmListener);
         arm2.addListener(dragArmListener);
     }
+
 }

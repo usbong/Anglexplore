@@ -28,7 +28,7 @@ public class AssetLoaderGame {
     }
 
     public static void dispose(){
-
+        texturesGame.dispose();
     }
 
 }

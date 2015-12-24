@@ -6,7 +6,6 @@
 
 package com.colim.anglexplore.actors;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -21,11 +20,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
 public class Point extends Image {
 
+    private Vector2 curPos;
     public Point(TextureRegion texture, Vector2 position) {
         super(texture);
         setBounds(getX(), getY(), getWidth(), getHeight());
         setPosition(position.x, position.y);
         dragListener.setTapSquareSize(2);
+
+        this.curPos = position;
         this.addListener(dragListener);
     }
 
@@ -33,6 +35,10 @@ public class Point extends Image {
     @Override
     public void act(float delta) {
         super.act(delta);
+    }
+
+    public Vector2 getCurPos() {
+        return curPos.set(this.getX() + this.getWidth()/2, this.getY() + this.getHeight()/2);
     }
 
     DragListener dragListener = new DragListener() {

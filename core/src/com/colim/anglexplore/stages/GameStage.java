@@ -80,12 +80,12 @@ public class GameStage extends Stage {
         float angle_x = ((float) Math.random()) * 90f;
         float angle_y = ((float) Math.random()) * 180f;
 
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(0), new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(1), new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), 90 - angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(2), new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(3), new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), 180-angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(4), new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ),((float) Math.random()) * 180f));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(5), new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), ((float) Math.random()) * 180f));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(0), 'A', new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(1), 'B', new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), 90 - angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(2), 'C', new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(3), 'D', new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), 180-angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(4), 'E', new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ),((float) Math.random()) * 180f));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(5), 'F', new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), ((float) Math.random()) * 180f));
 
         for (GameAngle angle : angles) {
             addActor(angle);
@@ -137,8 +137,8 @@ public class GameStage extends Stage {
 
                     angleSum = currentAngle.getAngle() + againstAngle.getAngle();
 
-                    Gdx.app.log("Angle1", String.valueOf(angleCurrentIndex));
-                    Gdx.app.log("Angle2", String.valueOf(angleAgainstIndex));
+                    Gdx.app.log("Angle1", String.valueOf(currentAngle.getLabelName()));
+                    Gdx.app.log("Angle2", String.valueOf(againstAngle.getLabelName()));
 
                     Gdx.app.log("Angle sum", String.valueOf(angleSum));
                     if(angleSum == 90.0) {

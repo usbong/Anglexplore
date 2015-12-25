@@ -23,17 +23,17 @@ public class GameAngle extends Group {
     private float randomAngle =  ((float) Math.random() * 360f);
     private float angle;
     private Vector2 position;
-    private Image label;
+    private Label label;
     private DragListener dragArmListener;
 
     private Vector2 startPoint, draggingPoint;
     private float deltaAngle;
 
-    public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion labelTexture, Vector2 position, float angle){
+    public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
         point = new Point(pointTexture, position);
         arm = new Arm(armTexture, randomAngle);
         arm2 = new Arm(armTexture, randomAngle+angle);
-        label = new Image(labelTexture);
+        label = new Label(labelTexture, labelName);
 
         addActor(point);
         addActor(arm);
@@ -67,6 +67,9 @@ public class GameAngle extends Group {
 
     public float getAngle() {
         return angle;
+    }
+    public char getLabelName() {
+        return label.getLabelName();
     }
 
     public void resetPosition() {

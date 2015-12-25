@@ -20,8 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
  * Created by hadri on 12/16/2015.
  */
 public class Arm  extends Image {
-
-
     public Arm(TextureRegion texture, float angle) {
         super(texture);
         setBounds(getX(), getY(), getWidth(), getHeight());

@@ -31,6 +31,7 @@ public class GameStage extends Stage {
     private TextureRegion armTexture;
     private List<TextureRegion> lettersTexture;
     private List<GameAngle> angles;
+    private float angleSum;
 
     public GameStage(){
 
@@ -133,7 +134,19 @@ public class GameStage extends Stage {
                 if( validPointDistance(currentAngle.getPointPosition(), againstAngle.getPointPosition()) &&
                         (validAngleDiff(currentAngle.getInitialAngle(), againstAngle.getTerminalAngle()) ||
                                 validAngleDiff(currentAngle.getTerminalAngle(), againstAngle.getInitialAngle()))) {
-                    Gdx.app.log("Collision", "POINT AND ANGLE COLLISION!");
+
+                    angleSum = currentAngle.getAngle() + againstAngle.getAngle();
+
+                    Gdx.app.log("Angle1", String.valueOf(angleCurrentIndex));
+                    Gdx.app.log("Angle2", String.valueOf(angleAgainstIndex));
+
+                    Gdx.app.log("Angle sum", String.valueOf(angleSum));
+                    if(angleSum == 90.0) {
+                        Gdx.app.log("Angle sum", "Right angle formed!");
+                    }
+                    else if(angleSum == 180.0) {
+                        Gdx.app.log("Angle sum", "Complementary angles!");
+                    }
                 }
             }
         }

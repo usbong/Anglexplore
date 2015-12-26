@@ -1,15 +1,19 @@
 package com.colim.anglexplore.stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.colim.anglexplore.actors.GameAngle;
 import com.colim.anglexplore.actors.GameUI;
+import com.colim.anglexplore.actors.Text;
 import com.colim.anglexplore.utils.AssetLoaderGame;
 import com.colim.anglexplore.utils.Constants;
 
@@ -25,13 +29,16 @@ import java.util.List;
 
 public class GameStage extends Stage {
 
-    private OrthographicCamera camera;
+
     private GameUI gameUI;
     private TextureRegion pointTexture;
     private TextureRegion armTexture;
     private List<TextureRegion> lettersTexture;
     private List<GameAngle> angles;
-    private float angleSum;
+
+
+    private Text text;
+
 
     public GameStage(){
 
@@ -48,8 +55,9 @@ public class GameStage extends Stage {
         gameUI = new GameUI();
         addActor(gameUI);
 
-        angles = new ArrayList<GameAngle>();
+        setUpText();
 
+        angles = new ArrayList<GameAngle>();
         generateGameAngles(angles);
 
         gameUI.generate.addListener(new ClickListener() {
@@ -71,9 +79,17 @@ public class GameStage extends Stage {
     }
 
     private void setupCamera() {
+        OrthographicCamera camera;
         camera = new OrthographicCamera(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0f);
         camera.update();
+    }
+
+    private void setUpText() {
+        text = new Text("", new Label.LabelStyle(new BitmapFont(), Color.FIREBRICK));
+        text.setWrap(true);
+        text.setWidth(Constants.WORLD_WIDTH);
+        addActor(text);
     }
 
     public void generateGameAngles(List<GameAngle> angles){
@@ -110,21 +126,17 @@ public class GameStage extends Stage {
 
     // Checks if two angles have a considerable angle difference to be considered collision
     public boolean validAngleDiff(float val1, float val2) {
-        if( Math.abs(val2 - val1) < 5 ) {
-            return true;
-        }
-        return false;
+        return Math.abs(val2 - val1) < 5;
     }
 
     // Checks if two points/vertices have considerable distance to be considered collision
     public boolean validPointDistance(Vector2 pos1, Vector2 pos2) {
-        if(pos1.dst(pos2) < 5) {
-            return true;
-        }
-        return false;
+        return pos1.dst(pos2) < 5;
     }
 
     public void checkCollision(List <GameAngle> angles){
+        float angleSum;
+        String result;
         for(int angleCurrentIndex = 0; angleCurrentIndex < angles.size(); angleCurrentIndex++) {
             for(int angleAgainstIndex = angleCurrentIndex+1; angleAgainstIndex < angles.size(); angleAgainstIndex++) {
 
@@ -137,20 +149,26 @@ public class GameStage extends Stage {
 
                     angleSum = currentAngle.getAngle() + againstAngle.getAngle();
 
-                    Gdx.app.log("Angle1", String.valueOf(currentAngle.getLabelName()));
-                    Gdx.app.log("Angle2", String.valueOf(againstAngle.getLabelName()));
-
-                    Gdx.app.log("Angle sum", String.valueOf(angleSum));
                     if(angleSum == 90.0) {
-                        Gdx.app.log("Angle sum", "Right angle formed!");
+                        result = "Complementary";
                     }
+
                     else if(angleSum == 180.0) {
-                        Gdx.app.log("Angle sum", "Complementary angles!");
+                        result = "Supplementary";
                     }
+
+                    else {
+                        result = "neither Complementary nor Supplementary";
+                    }
+
+                    text.setText("Angle " + String.valueOf(currentAngle.getLabelName() + " and Angle "
+                            + String.valueOf(againstAngle.getLabelName() + " are " + result
+                            + " angles. The sum of their angle measure is " + String.format("%.2f", angleSum) + " degrees.")));
                 }
             }
         }
     }
+
 
     @Override
     public void act(float delta) {

@@ -68,6 +68,7 @@ public class GameAngle extends Group {
     public float getAngle() {
         return angle;
     }
+
     public char getLabelName() {
         return label.getLabelName();
     }

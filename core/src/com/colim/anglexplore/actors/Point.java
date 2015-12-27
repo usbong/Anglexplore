@@ -38,7 +38,7 @@ public class Point extends Image {
     }
 
     public Vector2 getCurPos() {
-        return curPos.set(this.getX() + this.getWidth()/2, this.getY() + this.getHeight()/2);
+        return curPos.set(this.getX(), this.getY());
     }
 
     DragListener dragListener = new DragListener() {

@@ -105,13 +105,21 @@ public class GameStage extends Stage {
         Collections.shuffle(letters);
         System.out.print(letters);
 
-        // must randomize letter Texture
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(0)), letters.get(0), new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(1)), letters.get(1), new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), 90 - angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(2)), letters.get(2), new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(3)), letters.get(3), new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), 180-angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(4)), letters.get(4), new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ),((float) Math.random()) * 180f));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(5)), letters.get(5), new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), ((float) Math.random()) * 180f));
+        List<Vector2> initialPositions = new LinkedList<Vector2>();
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ));
+        initialPositions.add(new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ));
+        initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ));
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ));
+        initialPositions.add(new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ));
+        initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ));
+        Collections.shuffle(initialPositions);
+
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(0)), letters.get(0), initialPositions.get(0) , angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(1)), letters.get(1), initialPositions.get(1), 90 - angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(2)), letters.get(2), initialPositions.get(2), angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(3)), letters.get(3), initialPositions.get(3), 180-angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(4)), letters.get(4), initialPositions.get(4),((float) Math.random()) * 180f));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(5)), letters.get(5), initialPositions.get(5), ((float) Math.random()) * 180f));
 
         for (GameAngle angle : angles) {
             addActor(angle);

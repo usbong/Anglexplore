@@ -16,8 +16,11 @@ import com.colim.anglexplore.actors.GameUI;
 import com.colim.anglexplore.actors.Text;
 import com.colim.anglexplore.utils.AssetLoaderGame;
 import com.colim.anglexplore.utils.Constants;
+import com.colim.anglexplore.utils.LettersTextures;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -35,7 +38,7 @@ public class GameStage extends Stage {
     private TextureRegion armTexture;
     private List<TextureRegion> lettersTexture;
     private List<GameAngle> angles;
-
+    private LettersTextures lettersTextures;
 
     private Text text;
 
@@ -50,7 +53,7 @@ public class GameStage extends Stage {
         AssetLoaderGame.load();
         pointTexture = AssetLoaderGame.vertex;
         armTexture = AssetLoaderGame.arm;
-        lettersTexture = AssetLoaderGame.letters;
+        lettersTextures = new LettersTextures(AssetLoaderGame.letters);
 
         gameUI = new GameUI();
         addActor(gameUI);
@@ -96,12 +99,20 @@ public class GameStage extends Stage {
         float angle_x = ((float) Math.random()) * 90f;
         float angle_y = ((float) Math.random()) * 180f;
 
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(0), 'A', new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(1), 'B', new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), 90 - angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(2), 'C', new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(3), 'D', new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), 180-angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(4), 'E', new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ),((float) Math.random()) * 180f));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTexture.get(5), 'F', new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), ((float) Math.random()) * 180f));
+        // ugly hack
+        List<Character> letters = new LinkedList<Character>();
+        for (char n = 'A'; n <= 'F'; n++)
+            letters.add(n);
+        Collections.shuffle(letters);
+        System.out.print(letters);
+
+        // must randomize letter Texture
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(0)), letters.get(0), new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(1)), letters.get(1), new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), 90 - angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(2)), letters.get(2), new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ), angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(3)), letters.get(3), new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), 180-angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(4)), letters.get(4), new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ),((float) Math.random()) * 180f));
+        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(5)), letters.get(5), new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ), ((float) Math.random()) * 180f));
 
         for (GameAngle angle : angles) {
             addActor(angle);

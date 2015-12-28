@@ -103,8 +103,8 @@ public class GameStage extends Stage {
         for (char n = 'A'; n <= 'F'; n++)
             letters.add(n);
         Collections.shuffle(letters);
-        System.out.print(letters);
 
+        // another ugly hack
         List<Vector2> initialPositions = new LinkedList<Vector2>();
         initialPositions.add(new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ));
         initialPositions.add(new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ));
@@ -126,20 +126,12 @@ public class GameStage extends Stage {
         }
     }
 
-    // Really dirty hack.
     public void updateGameAngles(List<GameAngle> angles){
-        float angle_x = ((float) Math.random()) * 90f;
-        float angle_y = ((float) Math.random()) * 180f;
-
         for (GameAngle angle : angles){
-            angle.resetPosition();
+            angle.remove();
         }
-        angles.get(0).newRotation(angle_x);
-        angles.get(1).newRotation(90 - angle_x);
-        angles.get(2).newRotation(angle_y);
-        angles.get(3).newRotation(180 - angle_y);
-        angles.get(4).newRotation(((float) Math.random()) * 180f);
-        angles.get(5).newRotation(((float) Math.random()) * 180f);
+        angles.clear();
+        generateGameAngles(angles);
     }
 
     // Checks if two angles have a considerable angle difference to be considered collision

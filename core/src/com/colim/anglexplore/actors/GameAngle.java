@@ -41,7 +41,7 @@ public class GameAngle extends Group {
 
         this.angle = angle;
         this.position = position;
-        this.deltaAngle = 0; // no additional rotation yet
+        this.deltaAngle = 0;
 
         setupArmListener();
 
@@ -73,15 +73,6 @@ public class GameAngle extends Group {
         return label.getLabelName();
     }
 
-    public void resetPosition() {
-        point.setPosition(position.x, position.y);
-    }
-
-    public void newRotation(float angle){
-        float randomAngle =  ((float) Math.random() * 360f);
-        arm.setRotation(randomAngle);
-        arm2.setRotation(randomAngle + angle);
-    }
 
     @Override
     public void act(float delta) {

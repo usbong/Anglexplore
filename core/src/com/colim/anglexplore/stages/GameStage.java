@@ -36,7 +36,6 @@ public class GameStage extends Stage {
     private GameUI gameUI;
     private TextureRegion pointTexture;
     private TextureRegion armTexture;
-    private List<TextureRegion> lettersTexture;
     private List<GameAngle> angles;
     private LettersTextures lettersTextures;
 

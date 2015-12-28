@@ -10,17 +10,17 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.*;
 
-/**
- * Created by hadri on 12/28/2015.
+/*
+ * Created by Hadrian Paulo Lim on 2015.
+ *
+ * Copyright (c) Usbong Social Systems, Inc. All rights reserved.
  */
+
 public class LettersTextures {
     private Map lettersMap = new HashMap();
-    private List<TextureRegion> lettersTextureRegion;
-    private List keys;
 
     public LettersTextures(List<TextureRegion> lettersTextureRegion){
         int i = 0;
-        this.lettersTextureRegion = lettersTextureRegion;
         for (char n = 'A'; n <= 'F'; n++) {
             lettersMap.put(n, lettersTextureRegion.get(i));
             i++;
@@ -30,5 +30,4 @@ public class LettersTextures {
     public TextureRegion getLetter(char letter){
         return ((TextureRegion) lettersMap.get(letter));
     }
-
 }

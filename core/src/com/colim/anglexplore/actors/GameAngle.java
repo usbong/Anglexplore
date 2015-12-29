@@ -21,8 +21,8 @@ public class GameAngle extends Group {
     private Point point;
     private Arm arm, arm2;
     private float randomAngle =  ((float) Math.random() * 360f);
-    private float angle;
-    private Vector2 position;
+    private float angle, armRotation;
+    private Vector2 position, labelPosition, pointPosition;
     private Label label;
     private DragListener dragArmListener;
 
@@ -42,9 +42,10 @@ public class GameAngle extends Group {
         this.angle = angle;
         this.position = position;
         this.deltaAngle = 0;
-
+        labelPosition = new Vector2(point.getX() - 2 * point.getWidth(), point.getY());
+        pointPosition = position;
         setupArmListener();
-
+        armRotation = arm.getRotation();
     }
 
     public Vector2 getPointPosition() {
@@ -79,9 +80,10 @@ public class GameAngle extends Group {
         float armPosX = point.getX() + point.getWidth() / 2;
         float armPosY = point.getY() + point.getHeight() / 2;
         super.act(delta);
+        updateLabelPosition();
         arm.setPosition(armPosX, armPosY);
         arm2.setPosition(armPosX, armPosY);
-        label.setPosition(point.getX() + 8 * point.getWidth()/4, point.getY() + 5 * point.getHeight() / 4 );
+        label.setPosition(labelPosition.x, labelPosition.y);
     }
 
     @Override
@@ -108,5 +110,15 @@ public class GameAngle extends Group {
         arm.addListener(dragArmListener);
         arm2.addListener(dragArmListener);
     }
-
+    private void updateLabelPosition() {
+        if (pointPosition != new Vector2(point.getX(), point.getY())) {
+            labelPosition = new Vector2(point.getX() - 2 * point.getWidth(), point.getY());
+            pointPosition = new Vector2(point.getX(), point.getY());
+        }
+//        if (armRotation != arm.getRotation()){
+//            label.setOrigin(pointPosition.x, pointPosition.y);
+//            label.rotateBy(armRotation - arm.getRotation());
+//            armRotation = arm.getRotation();
+//        }
+    }
 }

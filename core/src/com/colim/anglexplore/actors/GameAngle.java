@@ -46,6 +46,8 @@ public class GameAngle extends Group {
         pointPosition = position;
         setupArmListener();
         armRotation = arm.getRotation();
+        label.setOrigin(2.5f * point.getWidth(), 0);
+        label.setRotation(arm.getRotation());
     }
 
     public Vector2 getPointPosition() {
@@ -115,10 +117,13 @@ public class GameAngle extends Group {
             labelPosition = new Vector2(point.getX() - 2 * point.getWidth(), point.getY());
             pointPosition = new Vector2(point.getX(), point.getY());
         }
-//        if (armRotation != arm.getRotation()){
-//            label.setOrigin(pointPosition.x, pointPosition.y);
-//            label.rotateBy(armRotation - arm.getRotation());
-//            armRotation = arm.getRotation();
-//        }
+        if (armRotation != arm.getRotation()){
+            label.setOrigin(2.5f * point.getWidth(), 0);
+            label.rotateBy(- armRotation + arm.getRotation());
+            if(label.getRotation() > 180){
+                // Flip texture here
+            }
+            armRotation = arm.getRotation();
+        }
     }
 }

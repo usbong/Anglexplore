@@ -1,6 +1,8 @@
 package com.colim.anglexplore.stages;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -35,11 +37,13 @@ public class GameStage extends Stage {
 
     private GameUI gameUI;
     private TextureRegion pointTexture;
+    private TextureRegion arrowsTexture;
     private TextureRegion armTexture;
     private List<GameAngle> angles;
     private LettersTextures lettersTextures;
 
     private Text text;
+    ClickListener clickListener;
 
 
     public GameStage(){
@@ -52,6 +56,7 @@ public class GameStage extends Stage {
         AssetLoaderGame.load();
         pointTexture = AssetLoaderGame.vertex;
         armTexture = AssetLoaderGame.arm;
+        arrowsTexture = AssetLoaderGame.arrows;
         lettersTextures = new LettersTextures(AssetLoaderGame.letters);
 
         gameUI = new GameUI();
@@ -78,6 +83,8 @@ public class GameStage extends Stage {
             }
         });
 
+
+
     }
 
     private void setupCamera() {
@@ -88,9 +95,12 @@ public class GameStage extends Stage {
     }
 
     private void setUpText() {
-        text = new Text("", new Label.LabelStyle(new BitmapFont(), Color.FIREBRICK));
+        BitmapFont font;
+        font = new BitmapFont();
+        font.getData().setScale(2f, 2f);
+        text = new Text("", new Label.LabelStyle(font, Color.FIREBRICK));
         text.setWrap(true);
-        text.setWidth(Constants.WORLD_WIDTH);
+        text.setWidth(3 * Constants.WORLD_WIDTH / 4);
         addActor(text);
     }
 
@@ -114,16 +124,30 @@ public class GameStage extends Stage {
         initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ));
         Collections.shuffle(initialPositions);
 
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(0)), letters.get(0), initialPositions.get(0) , angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(1)), letters.get(1), initialPositions.get(1), 90 - angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(2)), letters.get(2), initialPositions.get(2), angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(3)), letters.get(3), initialPositions.get(3), 180-angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(4)), letters.get(4), initialPositions.get(4),((float) Math.random()) * 180f));
-        angles.add(new GameAngle(pointTexture, armTexture, lettersTextures.getLetter(letters.get(5)), letters.get(5), initialPositions.get(5), ((float) Math.random()) * 180f));
+        angles.add(new GameAngle(pointTexture, armTexture, arrowsTexture, lettersTextures.getLetter(letters.get(0)), letters.get(0), initialPositions.get(0) , angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, arrowsTexture, lettersTextures.getLetter(letters.get(1)), letters.get(1), initialPositions.get(1), 90 - angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, arrowsTexture, lettersTextures.getLetter(letters.get(2)), letters.get(2), initialPositions.get(2), angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, arrowsTexture, lettersTextures.getLetter(letters.get(3)), letters.get(3), initialPositions.get(3), 180-angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, arrowsTexture, lettersTextures.getLetter(letters.get(4)), letters.get(4), initialPositions.get(4),((float) Math.random()) * 180f));
+        angles.add(new GameAngle(pointTexture, armTexture, arrowsTexture, lettersTextures.getLetter(letters.get(5)), letters.get(5), initialPositions.get(5), ((float) Math.random()) * 180f));
 
-        for (GameAngle angle : angles) {
+        for (final GameAngle angle : angles) {
             addActor(angle);
+            angle.addListener(clickListener = new ClickListener(){
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                    toggleArrowsVisibility(angle);
+                    return true;
+                }
+            });
         }
+    }
+
+    public void toggleArrowsVisibility(GameAngle activeAngle){
+        for(GameAngle angle : angles){
+            angle.setArrows(false);
+        }
+        activeAngle.setArrows(true);
+        activeAngle.removeListener(clickListener);
     }
 
     public void updateGameAngles(List<GameAngle> angles){

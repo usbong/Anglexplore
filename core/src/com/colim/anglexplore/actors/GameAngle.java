@@ -1,6 +1,5 @@
 package com.colim.anglexplore.actors;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -20,34 +19,52 @@ public class GameAngle extends Group {
 
     private Point point;
     private Arm arm, arm2;
+    private Image arrows;
     private float randomAngle =  ((float) Math.random() * 360f);
     private float angle, armRotation;
-    private Vector2 position, labelPosition, pointPosition;
+    private Vector2 labelPosition, pointPosition;
     private Label label;
     private DragListener dragArmListener;
 
     private Vector2 startPoint, draggingPoint;
     private float deltaAngle;
 
-    public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
+    public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion arrowTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
         point = new Point(pointTexture, position);
         arm = new Arm(armTexture, randomAngle);
         arm2 = new Arm(armTexture, randomAngle+angle);
         label = new Label(labelTexture, labelName);
+        arrows = new Image(arrowTexture);
 
-        addActor(point);
+        point.setZIndex(4);
+        arrows.setZIndex(3);
+        label.setZIndex(1);
+
         addActor(arm);
         addActor(arm2);
+        addActor(point);
 
         this.angle = angle;
-        this.position = position;
         this.deltaAngle = 0;
+
         labelPosition = new Vector2(point.getX() - 2 * point.getWidth(), point.getY());
         pointPosition = position;
+
         setupArmListener();
+
         armRotation = arm.getRotation();
         label.setOrigin(2.5f * point.getWidth(), 0);
         label.setRotation(arm.getRotation());
+    }
+
+    public void setArrows(boolean mode){
+        if (mode == true){
+            addActor(arrows);
+            arrows.setZIndex(2);
+        }
+        else {
+            arrows.remove();
+        }
     }
 
     public Vector2 getPointPosition() {
@@ -81,11 +98,15 @@ public class GameAngle extends Group {
     public void act(float delta) {
         float armPosX = point.getX() + point.getWidth() / 2;
         float armPosY = point.getY() + point.getHeight() / 2;
-        super.act(delta);
+
         updateLabelPosition();
+
         arm.setPosition(armPosX, armPosY);
         arm2.setPosition(armPosX, armPosY);
         label.setPosition(labelPosition.x, labelPosition.y);
+        arrows.setPosition(point.getX() - arrows.getWidth() / 3, point.getY() - arrows.getHeight() / 3);
+
+        super.act(delta);
     }
 
     @Override

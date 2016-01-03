@@ -12,8 +12,8 @@ import java.util.List;
  * Created by jerelynco on 12/21/15.
  */
 public class AssetLoaderGame {
-    public static Texture texturesGame;
-    public static TextureRegion vertex, arm;
+    public static Texture texturesGame, texturesGameSelected;
+    public static TextureRegion vertex, arm, arrows;
     public static List<TextureRegion> letters = new ArrayList<TextureRegion>();
 
     public static void load() {
@@ -21,6 +21,12 @@ public class AssetLoaderGame {
         texturesGame.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         vertex = new TextureRegion(texturesGame, 0, 82, 28, 28);
         arm = new TextureRegion(texturesGame, 66, 104, 127, 5);
+
+        texturesGameSelected = new Texture(Gdx.files.internal("AssetsArrows.png"));
+        arrows = new TextureRegion(texturesGameSelected, 0, 0, 74, 81);
+
+
+
         for(int i=0; i<6; i++){
             letters.add(new TextureRegion(texturesGame, i * 25, 0, 25, 25));
         }

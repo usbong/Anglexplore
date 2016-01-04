@@ -29,16 +29,14 @@ public class GameAngle extends Group {
     private Vector2 startPoint, draggingPoint;
     private float deltaAngle;
 
+    private boolean labelFlipped = false;
+
     public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion arrowTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
         point = new Point(pointTexture, position);
         arm = new Arm(armTexture, randomAngle);
         arm2 = new Arm(armTexture, randomAngle+angle);
         label = new Label(labelTexture, labelName);
         arrows = new Image(arrowTexture);
-
-        point.setZIndex(4);
-        arrows.setZIndex(3);
-        label.setZIndex(1);
 
         addActor(arm);
         addActor(arm2);
@@ -55,6 +53,17 @@ public class GameAngle extends Group {
         armRotation = arm.getRotation();
         label.setOrigin(2.5f * point.getWidth(), 0);
         label.setRotation(arm.getRotation());
+
+        point.setZIndex(300);
+        arrows.setZIndex(4);
+        arm.setZIndex(3);
+        arm2.setZIndex(2);
+        label.setZIndex(1);
+//        if (label.getRotation() % 360 > 90 && label.getRotation() % 360 < 270) {
+//            label.flip();
+//            labelFlipped = true;
+//        }
+
     }
 
     public void setArrows(boolean mode){
@@ -116,6 +125,7 @@ public class GameAngle extends Group {
     }
 
     public void setupArmListener(){
+
         dragArmListener = new DragListener() {
             @Override
             public void dragStart(InputEvent event, float x, float y, int pointer) {
@@ -141,8 +151,17 @@ public class GameAngle extends Group {
         if (armRotation != arm.getRotation()){
             label.setOrigin(2.5f * point.getWidth(), 0);
             label.rotateBy(- armRotation + arm.getRotation());
-            if(label.getRotation() > 180){
-                // Flip texture here
+            if(label.getRotation() % 360 > 90 && label.getRotation() % 360 < 270  && !labelFlipped){
+                label.flip();
+                labelFlipped = true;
+                System.out.println("Flip1");
+            }
+            // something wrong here idk yet
+            else if (label.getRotation() % 360 > 270  && label.getRotation() % 360 < 90 && labelFlipped)
+            {
+                label.flip();
+                labelFlipped = false;
+                System.out.println("Flip2");
             }
             armRotation = arm.getRotation();
         }

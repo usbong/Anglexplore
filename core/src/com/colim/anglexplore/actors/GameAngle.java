@@ -54,11 +54,9 @@ public class GameAngle extends Group {
         label.setOrigin(2.5f * point.getWidth(), 0);
         label.setRotation(arm.getRotation());
 
-        point.setZIndex(300);
-        arrows.setZIndex(4);
-        arm.setZIndex(3);
-        arm2.setZIndex(2);
-        label.setZIndex(1);
+        arm.setZIndex(0);
+        arm2.setZIndex(1);
+        point.setZIndex(2);
 //        if (label.getRotation() % 360 > 90 && label.getRotation() % 360 < 270) {
 //            label.flip();
 //            labelFlipped = true;
@@ -114,7 +112,7 @@ public class GameAngle extends Group {
         arm2.setPosition(armPosX, armPosY);
         label.setPosition(labelPosition.x, labelPosition.y);
         arrows.setPosition(point.getX() - arrows.getWidth() / 3, point.getY() - arrows.getHeight() / 3);
-
+        //arrows.rotateBy(delta * 60);
         super.act(delta);
     }
 

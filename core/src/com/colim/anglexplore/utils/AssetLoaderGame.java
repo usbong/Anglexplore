@@ -24,7 +24,7 @@ public class AssetLoaderGame {
         vertex = new TextureRegion(texturesGame, 0, 82, 28, 28);
         arm = new TextureRegion(texturesGame, 66, 104, 127, 5);
 
-        arrowClockwise = new TextureRegion(texturesGameSelected, 0, 0, 74, 81);
+        arrowClockwise = new TextureRegion(texturesGameSelected, 6, 12, 63, 63);
         arrowCounterclockwise = new TextureRegion(texturesGameSelected, 74, 0, 74, 81);
 
         for(int i=0; i<6; i++){

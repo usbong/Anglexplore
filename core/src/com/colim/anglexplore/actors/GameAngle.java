@@ -119,6 +119,10 @@ public class GameAngle extends Group {
         arrowClockwise.setPosition(point.getX() - arrowClockwise.getWidth() / 3, point.getY() - arrowClockwise.getHeight() / 3);
         arrowCounterclockwise.setPosition(point.getX() - arrowCounterclockwise.getWidth() / 3, point.getY() - arrowCounterclockwise.getHeight() / 3);
 
+        arrowClockwise.setOrigin(arrowClockwise.getWidth()/2 + 1, arrowClockwise.getHeight()/ 2 + 2);
+        arrowClockwise.rotateBy(1);
+        arrowCounterclockwise.setOrigin(arrowCounterclockwise.getWidth()/2, arrowCounterclockwise.getHeight()/2 );
+        //arrowCounterclockwise.rotateBy(-1);
         super.act(delta);
     }
 

@@ -22,7 +22,9 @@ public class AssetLoaderGame {
 
         texturesGame.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         vertex = new TextureRegion(texturesGame, 0, 82, 28, 28);
-        arm = new TextureRegion(texturesGame, 66, 104, 127, 5);
+        //arm = new TextureRegion(texturesGame, 66, 104, 127, 5);
+        // 2x higher
+        arm = new TextureRegion(texturesGame, 66, 99, 127, 10);
 
         arrowClockwise = new TextureRegion(texturesGameSelected, 6, 11, 63, 63);
         arrowCounterclockwise = new TextureRegion(texturesGameSelected, 74, 0, 74, 81);

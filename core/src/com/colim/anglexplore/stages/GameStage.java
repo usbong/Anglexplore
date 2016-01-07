@@ -167,7 +167,7 @@ public class GameStage extends Stage {
 
     // Checks if two points/vertices have considerable distance to be considered collision
     public boolean validPointDistance(Vector2 pos1, Vector2 pos2) {
-        return pos1.dst(pos2) < 5;
+        return pos1.dst(pos2) < 10;
     }
 
     public void checkCollision(List <GameAngle> angles){

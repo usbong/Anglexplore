@@ -58,7 +58,6 @@ public class GameAngle extends Group {
         arm.setZIndex(0);
         arm2.setZIndex(1);
         point.setZIndex(2);
-        updateLabelPosition();
     }
 
     public void setArrows(boolean mode){

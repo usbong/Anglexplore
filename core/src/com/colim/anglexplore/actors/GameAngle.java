@@ -58,11 +58,7 @@ public class GameAngle extends Group {
         arm.setZIndex(0);
         arm2.setZIndex(1);
         point.setZIndex(2);
-//        if (label.getRotation() % 360 > 90 && label.getRotation() % 360 < 270) {
-//            label.flip();
-//            labelFlipped = true;
-//        }
-
+        updateLabelPosition();
     }
 
     public void setArrows(boolean mode){
@@ -159,13 +155,13 @@ public class GameAngle extends Group {
         if (armRotation != arm.getRotation()){
             label.setOrigin(2.6f * point.getWidth(), 5);
             label.rotateBy(- armRotation + arm.getRotation());
-            if(label.getRotation() % 360 > 90 && label.getRotation() % 360 < 270  && !labelFlipped){
+            if(Math.abs(arm.getRotation()) % 360 > 90 && Math.abs(arm.getRotation()) % 360 < 270  && !labelFlipped){
                 label.flip();
                 labelFlipped = true;
                 System.out.println("Flip1");
             }
             // something wrong here idk yet
-            else if (label.getRotation() % 360 > 270  && label.getRotation() % 360 < 90 && labelFlipped)
+            else if ((Math.abs(arm.getRotation()) % 360 > 270 || Math.abs(arm.getRotation()) % 360 < 90) && labelFlipped)
             {
                 label.flip();
                 labelFlipped = false;

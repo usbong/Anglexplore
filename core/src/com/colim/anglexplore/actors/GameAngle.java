@@ -116,13 +116,13 @@ public class GameAngle extends Group {
         arm2.setPosition(armPosX, armPosY);
         label.setPosition(labelPosition.x, labelPosition.y);
 
-        arrowClockwise.setPosition(point.getX() - arrowClockwise.getWidth() / 3, point.getY() - arrowClockwise.getHeight() / 3);
-        arrowCounterclockwise.setPosition(point.getX() - arrowCounterclockwise.getWidth() / 3, point.getY() - arrowCounterclockwise.getHeight() / 3);
+        arrowClockwise.setPosition(point.getX() + point.getWidth() / 2 - arrowClockwise.getWidth() / 2 - 2, point.getY() + point.getHeight() / 2 - arrowClockwise.getHeight() / 2);
+        arrowCounterclockwise.setPosition(point.getX() + point.getWidth() / 2 - arrowCounterclockwise.getWidth() / 2 - 1, point.getY() + point.getHeight() / 2 - arrowClockwise.getHeight() / 2 - 6);
 
-        arrowClockwise.setOrigin(arrowClockwise.getWidth()/2 + 1, arrowClockwise.getHeight()/ 2 + 2);
+        arrowClockwise.setOrigin(arrowClockwise.getWidth()/2 , arrowClockwise.getHeight()/ 2);
         arrowClockwise.rotateBy(1);
-        arrowCounterclockwise.setOrigin(arrowCounterclockwise.getWidth()/2, arrowCounterclockwise.getHeight()/2 );
-        //arrowCounterclockwise.rotateBy(-1);
+        arrowCounterclockwise.setOrigin(arrowCounterclockwise.getWidth()/2, arrowCounterclockwise.getHeight()/2 - 2);
+        arrowCounterclockwise.rotateBy(-1);
         super.act(delta);
     }
 
@@ -157,7 +157,7 @@ public class GameAngle extends Group {
             pointPosition = new Vector2(point.getX(), point.getY());
         }
         if (armRotation != arm.getRotation()){
-            label.setOrigin(2.5f * point.getWidth(), 0);
+            label.setOrigin(2.6f * point.getWidth(), 5);
             label.rotateBy(- armRotation + arm.getRotation());
             if(label.getRotation() % 360 > 90 && label.getRotation() % 360 < 270  && !labelFlipped){
                 label.flip();

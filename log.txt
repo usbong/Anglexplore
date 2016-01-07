@@ -1,0 +1,334 @@
+commit 115e0c5c36bb53c10f2be79410a28159f8d0de74
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Thu Jan 7 20:41:17 2016 +0800
+
+    Changed initial randomAngle to be restrained to < 30 deg to fix label rotation bug
+
+commit 5dd48aa43440a5f83bc2510839d634f380162f13
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Thu Jan 7 20:22:05 2016 +0800
+
+    Resized arms to be thicker
+
+commit f884bc519166d5bfc238ee558e69ecd840081a62
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Thu Jan 7 19:52:02 2016 +0800
+
+    Fixed label rotation
+
+commit 05d806e88700710cdc456e968730fe5e4491f7c2
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Thu Jan 7 19:32:36 2016 +0800
+
+    Fixed rotation point of arrows and label; Finalized arrows rotation
+
+commit c464d5645eacfa6b60fd909c4ada0b65f18386ec
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Thu Jan 7 19:08:24 2016 +0800
+
+    preliminary arrow rotation
+
+commit 9afc9fc721cade5b7bcb6f501e651a3d6ab03c2e
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Thu Jan 7 18:59:17 2016 +0800
+
+    Improved text scaling and added arial.ttf
+
+commit a4a5ed032736df8735eeec69592a4c3d982c37c8
+Merge: 923b5dd 7cb49ca
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Thu Jan 7 18:46:22 2016 +0800
+
+    Merged from master (Arrow separation)
+
+commit 7cb49cafb9d9d1d8c48c036c49be04a4f1c31ada
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Mon Jan 4 21:57:24 2016 +0800
+
+    Separated arrows
+
+commit 923b5dd02f28cbed9818be12e51c67745f712b67
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Mon Jan 4 09:38:27 2016 +0800
+
+    Initial arrow rotation; Needs to be converted to own separate class
+
+commit 741ccdb7ac3ad911218eddbd84576395755e0b9e
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Mon Jan 4 08:57:53 2016 +0800
+
+    Initial relative label positioning
+
+commit 5a1955aa12289114c2864664cb91c9d7af381de6
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Sun Jan 3 13:32:02 2016 +0800
+
+    Added arrows for ux
+
+commit cdd902159f85c0f4e83bb7796f87d2c74d7329d6
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Tue Dec 29 16:07:59 2015 +0800
+
+    Implemented label rotation based on rotation of the arms; TO DO: Label flipping to be implemented
+
+commit 034078a6d5f7a69c9d7101aebafa8cd8f9e95b9b
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Tue Dec 29 15:37:52 2015 +0800
+
+    Restructured label positioning to be update relative to the movement of point position rather than hard values.
+
+commit b1b6598305421451ef4db4e30cd0dd9352fdc43a
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Mon Dec 28 16:21:14 2015 +0800
+
+    Redone Generate Angles Feature; Removed unused methods
+
+commit 806df81f7960b65fa7df382a9ee13e80a1171c25
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Mon Dec 28 16:10:50 2015 +0800
+
+    Randomized starting positions of angles
+
+commit 643bc7d9193628276f4042292cefe03171975797
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Mon Dec 28 16:04:56 2015 +0800
+
+    Refactored and disposed unused variables
+
+commit e55502c19c3fc408ef52805f1017f8241dd1b7f1
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Mon Dec 28 15:59:06 2015 +0800
+
+    randomized labels
+
+commit 6f49d4b35ebbd568a0a1c71a77ea966a1f4d2707
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Sun Dec 27 16:51:06 2015 +0800
+
+    Fixed generate new angle bug.
+
+commit 3e23874a68294070d59f99c86f0e600b4020fb53
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Sat Dec 26 15:37:55 2015 +0800
+
+    Added text response for result display.
+
+commit 8eca2454865cb663986e961bd050338f79532369
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Fri Dec 25 21:43:35 2015 +0800
+
+    Added label class. To be continued tom.
+
+commit 10ae12536f04a12ff28c89a2b7dcab4d4a0ff15f
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Fri Dec 25 21:06:57 2015 +0800
+
+    Modified collision detection to accommodate for the missed negative angle bug.
+
+commit 4dd2293c5073d72bff71aba7bed0ec13cb308f6e
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Thu Dec 24 15:27:02 2015 +0800
+
+    Updated collision detection.
+
+commit 84083e80a2a9de1c5a84a658f5bc560303fcf3b7
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Thu Dec 24 13:37:47 2015 +0800
+
+    Collision detection feature added. GUI yet to be adjusted.
+
+commit e07674504626277d2b12ad2163e6aa39e3ff854e
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Wed Dec 23 19:40:33 2015 +0800
+
+    Refactored GameAngle class
+
+commit 8cab26559ae9b0b0d511132557a0a8203e09b744
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Wed Dec 23 19:38:41 2015 +0800
+
+    Implemented Arm Drag Rotation
+
+commit ad367663dc13c24b920016cf3cd268ae61689485
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Wed Dec 23 13:25:48 2015 +0800
+
+    Resized assets; Added Labels for the Angles; Restructured Assets to use new Spritesheets; Removed unused variables;
+
+commit c2ceef9c3d0b3ba3fc92fd9bb7c82231600725ca
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Wed Dec 23 10:35:39 2015 +0800
+
+    Implemented generate angles feature and quit feature
+
+commit 12e04dcc0f71add1143ad20b65e861ec7b98e9cf
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Tue Dec 22 20:49:39 2015 +0800
+
+    Reimplemented clearScreen; Realigned Texture loading
+
+commit 235964f667f905fa1d265eb120f251a20f419868
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Tue Dec 22 08:50:43 2015 +0800
+
+    Added additional assets and modified screens
+
+commit cf59c21e3d46c04c370844d6b3624ecab9aeabed
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Mon Dec 21 19:47:09 2015 +0800
+
+    Refactored such that no point objects should exist in arm objects for memory optimization
+
+commit 9c8ee00a8516d6fa4ecba977f1e159ff06ef3328
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Mon Dec 21 16:08:54 2015 +0800
+
+    Added rotation, still buggy
+
+commit 8b0be7391c1c4848559ac346ea3d1b6dea9c05a9
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Mon Dec 21 13:56:28 2015 +0800
+
+    Vertex (with the angle) can now be dragged.
+
+commit d2464818943ea4389bbf1a92601a68071d24415c
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Mon Dec 21 11:43:47 2015 +0800
+
+    Preliminary drag
+
+commit 91d4f22bab2b8eba63a5476db87308e3abe61510
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Wed Dec 16 13:12:18 2015 +0800
+
+    Fixed placement of angles and reduced sizes of assets
+
+commit c37a158de46deccd33073dc1092edc4e31f57015
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Wed Dec 16 12:31:58 2015 +0800
+
+    Added tutorial. Fixed assets dimensions.
+
+commit c702cebf285aff1b8e13a33d84192eb11475c094
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Wed Dec 16 10:53:38 2015 +0800
+
+    Adjusted some asset sizes; Created GameAngle class
+
+commit 38796aa71fadf099600454542dc074e4871c07b3
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Wed Dec 16 09:58:52 2015 +0800
+
+    Revised Point Class to use textures; Refactored GameStage and GameScreen
+
+commit 9e541ad8157df24d3f7a6a8e7cb93aa04cfebc99
+Merge: 4b9c431 99898b0
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Tue Dec 15 23:56:31 2015 +0800
+
+    Merged from Je. Need to refactor/create new class which inherits from Image class to render well
+
+commit 4b9c431609f4cc1ca407d4d2485b0356e3da7cf9
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Tue Dec 15 22:55:15 2015 +0800
+
+    Fixed Viewports to be i
+    solated per stage and improved Point class
+
+commit 99898b0769af38717a965b37818933223c4682ce
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Tue Dec 15 22:51:12 2015 +0800
+
+    Added assets. Missing: Angles
+
+commit a51fcce0a8a4b3fc31fbb518e682c710c02c2574
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Tue Dec 15 22:49:08 2015 +0800
+
+    Placed assets in the game.
+
+commit 21c5ca92179c8a01c750dd93ba8511e10ae65339
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Tue Dec 15 19:43:49 2015 +0800
+
+    Placed assets in the game.
+
+commit dd2098ba964a76c903081d59df3d4d38ebda93f7
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Tue Dec 15 16:32:26 2015 +0800
+
+    Added assets
+
+commit 15317527d4d891617861d6b64ff764b2fea9aad3
+Merge: 3a13969 8c6c6c4
+Author: Hadrian Paulo Lim <hadrianpaulo@gmail.com>
+Date:   Tue Dec 15 10:49:07 2015 +0800
+
+    Merge pull request #1 from chrisamanse/chrisamanse-license-update
+    
+    Update license from MIT to ALv2
+
+commit 8c6c6c4d47d6dab73b02873a07779fd6827fe1b5
+Author: Chris Amanse <christopheramanse@gmail.com>
+Date:   Tue Dec 15 09:10:28 2015 +0800
+
+    Update license from MIT to ALv2
+
+commit 3a13969aabb54958c905cc1c83bc9eeaf6107d85
+Author: jerelynco <jerelynco@gmail.com>
+Date:   Mon Dec 14 23:24:22 2015 +0800
+
+    Added title and tap text
+
+commit bf474dd332a3a38add4e0dabd0bfacf15fa29ea1
+Merge: e74a328 c4a5f89
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Mon Dec 14 20:06:44 2015 +0800
+
+    Merge branch 'master' of https://github.com/hadrianpaulo/Anglexplore
+
+commit e74a328010f1ad76a380c9299da0ee5f328ed868
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Mon Dec 14 20:02:38 2015 +0800
+
+    Created Point Actor and revised GameAngle Actor
+
+commit c4a5f89f4b5459d20a9a538b6121eb3f382f80c6
+Author: Hadrian Paulo Lim <hadrianpaulo@gmail.com>
+Date:   Mon Dec 14 14:11:15 2015 +0800
+
+    Create README.md
+
+commit 6883d5cf370fa1c4c866310e6c25740f3122fdb8
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Mon Dec 14 10:56:19 2015 +0800
+
+    Added Start Screen and set up proper libGDX game structure utilizing
+    Scene2D. Included placeholder images for start screen buttons and title. Camera has also
+    been updated to be orthogonal2D.
+
+commit 2cdb1dee74ebc2e0e71a743415a9a131e42bf7b5
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Sun Dec 13 23:35:51 2015 +0800
+
+    Created game structure utilizing Scene2D.
+    Classes unimplemented atm.
+
+commit f715fb40d91ed821fd5ecadb4d28dd54c80e2613
+Merge: f68e4fd 194ddac
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Sun Dec 13 20:49:02 2015 +0800
+
+    Merge branch 'master' of https://github.com/hadrianpaulo/Anglexplore
+
+commit 194ddac7ddeb893bfe9e8149f2e3fa4e3c6ea270
+Author: Hadrian Paulo Lim <hadrianpaulo@gmail.com>
+Date:   Sun Dec 13 20:47:00 2015 +0800
+
+    Initial commit
+
+commit f68e4fdd3c0137be2a12fdce9afe478015be76c4
+Author: hadrianpaulo <hadrianpaulo@gmail.com>
+Date:   Sun Dec 13 20:30:17 2015 +0800
+
+    Initial commit and generation of default files from LibGDX. Includes all platforms.  Target Android SDK: 20; Min Android SDK: 8

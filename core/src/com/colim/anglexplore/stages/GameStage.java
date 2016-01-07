@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -94,9 +95,11 @@ public class GameStage extends Stage {
     }
 
     private void setUpText() {
-        BitmapFont font;
-        font = new BitmapFont();
-        font.getData().setScale(2f, 2f);
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("arial.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 30;
+        BitmapFont font = generator.generateFont(parameter); // font size 12 pixels
+        generator.dispose();
         text = new Text("", new Label.LabelStyle(font, Color.FIREBRICK));
         text.setWrap(true);
         text.setWidth(3 * Constants.WORLD_WIDTH / 4);

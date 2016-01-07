@@ -1,6 +1,13 @@
 # Anglexplore
 #### Cross-Platform Math Educational Application on Learning Angles. 
 
+#### Screenshots
+
+![start screen](http://imgur.com/7kXDPH3)
+!(instructions](http://imgur.com/irbMgyR)
+![game proper](http://imgur.com/IDL8gKw)
+![angle summation](http://imgur.com/hX3dmnz)
+
 Copyright 2015 Usbong Social Systems, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at

@@ -19,7 +19,7 @@ public class GameAngle extends Group {
 
     private Point point;
     private Arm arm, arm2;
-    private Image arrows;
+    private Image arrowClockwise, arrowCounterclockwise;
     private float randomAngle =  ((float) Math.random() * 360f);
     private float angle, armRotation;
     private Vector2 labelPosition, pointPosition;
@@ -30,13 +30,14 @@ public class GameAngle extends Group {
     private float deltaAngle;
 
     private boolean labelFlipped = false;
+    public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion arrowClockwiseTexture, TextureRegion arrowCounterclockwiseTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
 
-    public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion arrowTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
         point = new Point(pointTexture, position);
         arm = new Arm(armTexture, randomAngle);
         arm2 = new Arm(armTexture, randomAngle+angle);
         label = new Label(labelTexture, labelName);
-        arrows = new Image(arrowTexture);
+        arrowClockwise = new Image(arrowClockwiseTexture);
+        arrowCounterclockwise = new Image(arrowCounterclockwiseTexture);
 
         addActor(arm);
         addActor(arm2);
@@ -65,12 +66,15 @@ public class GameAngle extends Group {
     }
 
     public void setArrows(boolean mode){
-        if (mode == true){
-            addActor(arrows);
-            arrows.setZIndex(2);
+        if (mode){
+            addActor(arrowClockwise);
+            addActor(arrowCounterclockwise);
+            arrowClockwise.setZIndex(2);
+            arrowCounterclockwise.setZIndex(2);
         }
         else {
-            arrows.remove();
+            arrowClockwise.remove();
+            arrowCounterclockwise.remove();
         }
     }
 
@@ -111,8 +115,10 @@ public class GameAngle extends Group {
         arm.setPosition(armPosX, armPosY);
         arm2.setPosition(armPosX, armPosY);
         label.setPosition(labelPosition.x, labelPosition.y);
-        arrows.setPosition(point.getX() - arrows.getWidth() / 3, point.getY() - arrows.getHeight() / 3);
-        //arrows.rotateBy(delta * 60);
+
+        arrowClockwise.setPosition(point.getX() - arrowClockwise.getWidth() / 3, point.getY() - arrowClockwise.getHeight() / 3);
+        arrowCounterclockwise.setPosition(point.getX() - arrowCounterclockwise.getWidth() / 3, point.getY() - arrowCounterclockwise.getHeight() / 3);
+
         super.act(delta);
     }
 

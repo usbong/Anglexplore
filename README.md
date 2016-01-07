@@ -3,10 +3,10 @@
 
 #### Screenshots
 
-![start screen](http://imgur.com/7kXDPH3)
-!(instructions](http://imgur.com/irbMgyR)
-![game proper](http://imgur.com/IDL8gKw)
-![angle summation](http://imgur.com/hX3dmnz)
+![start screen](http://i.imgur.com/7kXDPH3)
+!(instructions](http://i.imgur.com/irbMgyR)
+![game proper](http://i.imgur.com/IDL8gKw)
+![angle summation](http://i.imgur.com/hX3dmnz)
 
 Copyright 2015 Usbong Social Systems, Inc.
 

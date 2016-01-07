@@ -20,7 +20,7 @@ public class GameAngle extends Group {
     private Point point;
     private Arm arm, arm2;
     private Image arrowClockwise, arrowCounterclockwise;
-    private float randomAngle =  ((float) Math.random() * 360f);
+    private float randomAngle =  ((float) Math.random() * 30f);
     private float angle, armRotation;
     private Vector2 labelPosition, pointPosition;
     private Label label;
@@ -29,7 +29,7 @@ public class GameAngle extends Group {
     private Vector2 startPoint, draggingPoint;
     private float deltaAngle;
 
-    private boolean labelFlipped = false;
+    private boolean labelFlipped;
     public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion arrowClockwiseTexture, TextureRegion arrowCounterclockwiseTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
 
         point = new Point(pointTexture, position);
@@ -58,6 +58,7 @@ public class GameAngle extends Group {
         arm.setZIndex(0);
         arm2.setZIndex(1);
         point.setZIndex(2);
+
     }
 
     public void setArrows(boolean mode){
@@ -105,7 +106,7 @@ public class GameAngle extends Group {
         float armPosX = point.getX() + point.getWidth() / 2;
         float armPosY = point.getY() + point.getHeight() / 2;
 
-        updateLabelPosition();
+        updateLabelRotation();
 
         arm.setPosition(armPosX, armPosY);
         arm2.setPosition(armPosX, armPosY);
@@ -146,7 +147,7 @@ public class GameAngle extends Group {
         arm.addListener(dragArmListener);
         arm2.addListener(dragArmListener);
     }
-    private void updateLabelPosition() {
+    private void updateLabelRotation() {
         if (pointPosition != new Vector2(point.getX(), point.getY())) {
             labelPosition = new Vector2(point.getX() - 2 * point.getWidth(), point.getY());
             pointPosition = new Vector2(point.getX(), point.getY());

@@ -39,15 +39,10 @@ public class StartScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
 
         startScreenTexture = AssetLoaderStart.screen_start;
-        tapToContinueTexture = AssetLoaderStart.tap_to_continue;
 
         Image startScreen = new Image(startScreenTexture);
-        final Image tapToContinue = new Image(tapToContinueTexture);
-
-        tapToContinue.setPosition(2 * Constants.WORLD_WIDTH / 3, Constants.WORLD_HEIGHT / 3, Align.center);
 
         stage.addActor(startScreen);
-        stage.addActor(tapToContinue);
 
         stage.addListener(new ActorGestureListener() {
             @Override
@@ -58,10 +53,7 @@ public class StartScreen extends ScreenAdapter {
                     tutorialTexture = AssetLoaderStart.screen_instructions;
 
                     Image tutorial = new Image(tutorialTexture);
-                    tapToContinue.setPosition(Constants.WORLD_WIDTH / 2, Constants.WORLD_HEIGHT / 3, Align.center);
-
                     stage.addActor(tutorial);
-                    stage.addActor(tapToContinue);
 
                 }
                 else{

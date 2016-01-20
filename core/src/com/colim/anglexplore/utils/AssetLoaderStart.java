@@ -19,7 +19,6 @@ public class AssetLoaderStart {
 
         screen_start = new TextureRegion(texturesStart, 0, 0, 1280, 720);
         screen_instructions = new TextureRegion(texturesStart, 0, 720, 1280, 720);
-        tap_to_continue = new TextureRegion(texturesStart, 0, 1440, 430, 58);
     }
 
     public static void dispose(){

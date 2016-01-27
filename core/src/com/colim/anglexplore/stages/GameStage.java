@@ -100,7 +100,7 @@ public class GameStage extends Stage {
         parameter.size = 30;
         BitmapFont font = generator.generateFont(parameter); // font size 12 pixels
         generator.dispose();
-        text = new Text("", new Label.LabelStyle(font, Color.FIREBRICK));
+        text = new Text("", new Label.LabelStyle(font, Color.WHITE));
         text.setWrap(true);
         text.setWidth(3 * Constants.WORLD_WIDTH / 4);
         addActor(text);
@@ -118,12 +118,12 @@ public class GameStage extends Stage {
 
         // another ugly hack
         List<Vector2> initialPositions = new LinkedList<Vector2>();
-        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ));
-        initialPositions.add(new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ));
-        initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 ));
-        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ));
-        initialPositions.add(new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ));
-        initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 ));
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 - 40));
+        initialPositions.add(new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 - 40));
+        initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 - 40));
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 - 40));
+        initialPositions.add(new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 - 40));
+        initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 - 40));
         Collections.shuffle(initialPositions);
 
         angles.add(new GameAngle(pointTexture, armTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(0)), letters.get(0), initialPositions.get(0) , angle_x));

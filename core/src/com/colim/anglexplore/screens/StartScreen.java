@@ -23,7 +23,7 @@ import com.colim.anglexplore.utils.Constants;
 public class StartScreen extends ScreenAdapter {
 
     private Stage stage;
-    private TextureRegion startScreenTexture, tapToContinueTexture, tutorialTexture;
+    private TextureRegion startScreenTexture, tutorialTexture;
 
 
     private Game game;

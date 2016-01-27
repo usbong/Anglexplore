@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class AssetLoaderStart {
     public static Texture texturesStart;
     public static TextureRegion screen_start, screen_instructions;
-    public static TextureRegion tap_to_continue;
 
 
     public static void load() {

@@ -1,9 +1,6 @@
 package com.colim.anglexplore.stages;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.assets.loaders.AssetLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -56,7 +53,7 @@ public class GameStage extends Stage {
         AssetLoaderGame.load();
         pointTexture = AssetLoaderGame.vertex;
         armTexture = AssetLoaderGame.arm;
-        highlightArmTexture = AssetLoaderGame.arm;
+        highlightArmTexture = AssetLoaderGame.highlightArm;
         arrowClockwiseTexture = AssetLoaderGame.arrowClockwise;
         arrowCounterclockwiseTexture = AssetLoaderGame.arrowCounterclockwise;
         lettersTextures = new LettersTextures(AssetLoaderGame.letters);
@@ -84,8 +81,6 @@ public class GameStage extends Stage {
                 return true;
             }
         });
-
-
 
     }
 
@@ -181,15 +176,27 @@ public class GameStage extends Stage {
                 GameAngle currentAngle = angles.get(angleCurrentIndex);
                 GameAngle againstAngle = angles.get(angleAgainstIndex);
 
-                if( validPointDistance(currentAngle.getPointPosition(), againstAngle.getPointPosition()) &&
-                        (validAngleDiff(currentAngle.getInitialAngle(), againstAngle.getTerminalAngle()) ||
-                                validAngleDiff(currentAngle.getTerminalAngle(), againstAngle.getInitialAngle()))) {
+                boolean currInitAgainstTermCollide = validAngleDiff(currentAngle.getInitialAngle(), againstAngle.getTerminalAngle());
+                boolean currTermAgainstInitCollide = validAngleDiff(currentAngle.getTerminalAngle(), againstAngle.getInitialAngle());
+
+                if(validPointDistance(currentAngle.getPointPosition(), againstAngle.getPointPosition()) &&
+                        (currInitAgainstTermCollide || currTermAgainstInitCollide)) {
 
                     angleSum = currentAngle.getAngle() + againstAngle.getAngle();
-                    currentAngle.highlightInitial();
-                    againstAngle.highlightTerminal();
 
-                    if(angleSum == 90.0) {
+                    if(angleSum == 90.0 || angleSum == 180.0) {
+                        if(currInitAgainstTermCollide){
+                            currentAngle.setHighlightTerminal();
+                            againstAngle.setHighlightInitial();
+
+                        }
+                        else if(currTermAgainstInitCollide){
+                            currentAngle.setHighlightInitial();
+                            againstAngle.setHighlightTerminal();
+                        }
+                    }
+
+                    if(angleSum == 90.0){
                         result = "Complementary";
                     }
 
@@ -204,6 +211,10 @@ public class GameStage extends Stage {
                     text.setText("Angle " + String.valueOf(currentAngle.getLabelName() + " and Angle "
                             + String.valueOf(againstAngle.getLabelName() + " are " + result
                             + " angles. The sum of their angle measure is " + String.format("%.2f", angleSum) + " degrees.")));
+                }
+                else {
+                    currentAngle.clearHighlight();
+                    againstAngle.clearHighlight();
                 }
             }
         }

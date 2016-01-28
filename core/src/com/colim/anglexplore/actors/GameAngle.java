@@ -21,8 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 public class GameAngle extends Group {
 
     private Point point;
-    private Arm arm, arm2;
-    private TextureRegion highlightArm;
+    private Arm arm, arm2, highlightArm, highlightArm2;
     private Image arrowClockwise, arrowCounterclockwise;
     private float randomAngle =  ((float) Math.random() * 30f);
     private float angle, armRotation;
@@ -42,7 +41,9 @@ public class GameAngle extends Group {
         label = new Label(labelTexture, labelName);
         arrowClockwise = new Image(arrowClockwiseTexture);
         arrowCounterclockwise = new Image(arrowCounterclockwiseTexture);
-        highlightArm = highlightArmTexture;
+        highlightArm = new Arm(highlightArmTexture, randomAngle);
+        highlightArm2 = new Arm(highlightArmTexture, randomAngle+angle);
+
 
         addActor(arm);
         addActor(arm2);
@@ -62,7 +63,7 @@ public class GameAngle extends Group {
 
         arm.setZIndex(0);
         arm2.setZIndex(1);
-        point.setZIndex(2);
+        point.setZIndex(3);
     }
 
     public void setArrows(boolean mode){
@@ -76,6 +77,22 @@ public class GameAngle extends Group {
             arrowClockwise.remove();
             arrowCounterclockwise.remove();
         }
+    }
+
+    public void setHighlightInitial(){
+        addActor(highlightArm);
+        highlightArm.setZIndex(2);
+
+    }
+
+    public void setHighlightTerminal(){
+        addActor(highlightArm2);
+        highlightArm2.setZIndex(2);
+    }
+
+    public void clearHighlight(){
+        highlightArm.remove();
+        highlightArm2.remove();
     }
 
     public Vector2 getPointPosition() {
@@ -96,14 +113,6 @@ public class GameAngle extends Group {
         return arm2.getRotation() % 360;
     }
 
-    public void highlightInitial() {
-        arm.setDrawable(new SpriteDrawable(new Sprite(highlightArm)));
-    }
-
-    public void highlightTerminal() {
-        arm2.setDrawable(new SpriteDrawable(new Sprite(highlightArm)));
-    }
-
     public float getAngle() {
         return angle;
     }
@@ -122,6 +131,10 @@ public class GameAngle extends Group {
 
         arm.setPosition(armPosX, armPosY);
         arm2.setPosition(armPosX, armPosY);
+
+        highlightArm.setPosition(armPosX, armPosY);
+        highlightArm2.setPosition(armPosX, armPosY);
+
         label.setPosition(labelPosition.x, labelPosition.y);
 
         arrowClockwise.setPosition(point.getX() + point.getWidth() / 2 - arrowClockwise.getWidth() / 2 - 2, point.getY() + point.getHeight() / 2 - arrowClockwise.getHeight() / 2);
@@ -152,7 +165,9 @@ public class GameAngle extends Group {
                 draggingPoint = new Vector2(x, y).sub(startPoint);
                 deltaAngle = MathUtils.atan2(draggingPoint.y, draggingPoint.x) * MathUtils.radiansToDegrees;
                 arm.rotateBy(deltaAngle);
+                highlightArm.rotateBy(deltaAngle);
                 arm2.rotateBy(deltaAngle);
+                highlightArm2.rotateBy(deltaAngle);
             }
         };
 

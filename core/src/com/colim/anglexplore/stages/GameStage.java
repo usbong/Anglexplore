@@ -3,6 +3,7 @@ package com.colim.anglexplore.stages;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.assets.loaders.AssetLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -37,7 +38,7 @@ public class GameStage extends Stage {
 
 
     private GameUI gameUI;
-    private TextureRegion pointTexture, armTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture;
+    private TextureRegion pointTexture, armTexture, highlightArmTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture;
     private List<GameAngle> angles;
     private LettersTextures lettersTextures;
 
@@ -55,6 +56,7 @@ public class GameStage extends Stage {
         AssetLoaderGame.load();
         pointTexture = AssetLoaderGame.vertex;
         armTexture = AssetLoaderGame.arm;
+        highlightArmTexture = AssetLoaderGame.arm;
         arrowClockwiseTexture = AssetLoaderGame.arrowClockwise;
         arrowCounterclockwiseTexture = AssetLoaderGame.arrowCounterclockwise;
         lettersTextures = new LettersTextures(AssetLoaderGame.letters);
@@ -126,12 +128,12 @@ public class GameStage extends Stage {
         initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 - 40));
         Collections.shuffle(initialPositions);
 
-        angles.add(new GameAngle(pointTexture, armTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(0)), letters.get(0), initialPositions.get(0) , angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(1)), letters.get(1), initialPositions.get(1), 90 - angle_x));
-        angles.add(new GameAngle(pointTexture, armTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(2)), letters.get(2), initialPositions.get(2), angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(3)), letters.get(3), initialPositions.get(3), 180-angle_y));
-        angles.add(new GameAngle(pointTexture, armTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(4)), letters.get(4), initialPositions.get(4),((float) Math.random()) * 180f));
-        angles.add(new GameAngle(pointTexture, armTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(5)), letters.get(5), initialPositions.get(5), ((float) Math.random()) * 180f));
+        angles.add(new GameAngle(pointTexture, armTexture, highlightArmTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(0)), letters.get(0), initialPositions.get(0) , angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, highlightArmTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(1)), letters.get(1), initialPositions.get(1), 90 - angle_x));
+        angles.add(new GameAngle(pointTexture, armTexture, highlightArmTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(2)), letters.get(2), initialPositions.get(2), angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, highlightArmTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(3)), letters.get(3), initialPositions.get(3), 180-angle_y));
+        angles.add(new GameAngle(pointTexture, armTexture, highlightArmTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(4)), letters.get(4), initialPositions.get(4),((float) Math.random()) * 180f));
+        angles.add(new GameAngle(pointTexture, armTexture, highlightArmTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(5)), letters.get(5), initialPositions.get(5), ((float) Math.random()) * 180f));
 
         for (final GameAngle angle : angles) {
             addActor(angle);
@@ -184,6 +186,8 @@ public class GameStage extends Stage {
                                 validAngleDiff(currentAngle.getTerminalAngle(), againstAngle.getInitialAngle()))) {
 
                     angleSum = currentAngle.getAngle() + againstAngle.getAngle();
+                    currentAngle.highlightInitial();
+                    againstAngle.highlightTerminal();
 
                     if(angleSum == 90.0) {
                         result = "Complementary";

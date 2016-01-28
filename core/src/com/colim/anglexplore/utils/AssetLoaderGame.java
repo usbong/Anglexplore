@@ -22,16 +22,18 @@ public class AssetLoaderGame {
         texturesHighlightArm = new Texture(Gdx.files.internal("AssetsUI.png"));
 
         texturesGame.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-        vertex = new TextureRegion(texturesGame, 0, 82, 28, 28);
+        vertex = new TextureRegion(texturesGame, 0, 50, 24, 25);
         //arm = new TextureRegion(texturesGame, 66, 104, 127, 5);
         // 2x higher
-        arm = new TextureRegion(texturesGame, 66, 99, 150, 10);
+
+        arm = new TextureRegion(texturesGame, 25, 56, 150, 7);
+        highlightArm = new TextureRegion(texturesGame, 25, 50, 150, 6);
 
         arrowClockwise = new TextureRegion(texturesGameSelected, 6, 11, 63, 63);
         arrowCounterclockwise = new TextureRegion(texturesGameSelected, 74, 0, 74, 81);
 
         for(int i=0; i<6; i++){
-            letters.add(new TextureRegion(texturesGame, i * 25, 0, 25, 25));
+            letters.add(new TextureRegion(texturesGame, i * 40, 0, 40, 50));
         }
 
         System.out.println(letters.size());

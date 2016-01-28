@@ -1,6 +1,8 @@
 package com.colim.anglexplore.actors;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -8,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 /*
  * Created by Hadrian Paulo Lim on 2015.
@@ -19,6 +22,7 @@ public class GameAngle extends Group {
 
     private Point point;
     private Arm arm, arm2;
+    private TextureRegion highlightArm;
     private Image arrowClockwise, arrowCounterclockwise;
     private float randomAngle =  ((float) Math.random() * 30f);
     private float angle, armRotation;
@@ -30,7 +34,7 @@ public class GameAngle extends Group {
     private float deltaAngle;
 
     private boolean labelFlipped;
-    public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion arrowClockwiseTexture, TextureRegion arrowCounterclockwiseTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
+    public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion highlightArmTexture, TextureRegion arrowClockwiseTexture, TextureRegion arrowCounterclockwiseTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
 
         point = new Point(pointTexture, position);
         arm = new Arm(armTexture, randomAngle);
@@ -38,6 +42,7 @@ public class GameAngle extends Group {
         label = new Label(labelTexture, labelName);
         arrowClockwise = new Image(arrowClockwiseTexture);
         arrowCounterclockwise = new Image(arrowCounterclockwiseTexture);
+        highlightArm = highlightArmTexture;
 
         addActor(arm);
         addActor(arm2);
@@ -58,7 +63,6 @@ public class GameAngle extends Group {
         arm.setZIndex(0);
         arm2.setZIndex(1);
         point.setZIndex(2);
-
     }
 
     public void setArrows(boolean mode){
@@ -90,6 +94,14 @@ public class GameAngle extends Group {
             return 360 + arm2.getRotation() % 360;
         }
         return arm2.getRotation() % 360;
+    }
+
+    public void highlightInitial() {
+        arm.setDrawable(new SpriteDrawable(new Sprite(highlightArm)));
+    }
+
+    public void highlightTerminal() {
+        arm2.setDrawable(new SpriteDrawable(new Sprite(highlightArm)));
     }
 
     public float getAngle() {

@@ -12,7 +12,7 @@ import java.util.List;
  * Created by jerelynco on 12/21/15.
  */
 public class AssetLoaderGame {
-    public static Texture texturesGame, texturesGameSelected, texturesHighlightArm, textureClockwise, textureCounterclockwise;
+    public static Texture texturesGame, textureVertex, texturesGameSelected, texturesHighlightArm, textureClockwise, textureCounterclockwise;
     public static TextureRegion vertex, arm, highlightArm, arrowClockwise, arrowCounterclockwise;
     public static List<TextureRegion> letters = new ArrayList<TextureRegion>();
 
@@ -20,9 +20,11 @@ public class AssetLoaderGame {
         texturesGame = new Texture(Gdx.files.internal("AssetsGame.png"));
         texturesGameSelected = new Texture(Gdx.files.internal("AssetsArrows.png"));
         texturesHighlightArm = new Texture(Gdx.files.internal("AssetsUI.png"));
+        textureVertex = new Texture(Gdx.files.internal("AssetsVertex.png"));
 
         texturesGame.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-        vertex = new TextureRegion(texturesGame, 0, 50, 24, 25);
+//        vertex = new TextureRegion(texturesGame, 0, 50, 24, 25);
+        vertex = new TextureRegion(textureVertex, 0, 0, 100, 100);
         //arm = new TextureRegion(texturesGame, 66, 104, 127, 5);
         // 2x higher
 

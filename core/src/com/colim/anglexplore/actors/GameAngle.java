@@ -22,7 +22,7 @@ public class GameAngle extends Group {
 
     private Point point;
     private Arm arm, arm2, highlightArm, highlightArm2;
-    // private Image arrowClockwise, arrowCounterclockwise;
+    private Image arrowClockwise, arrowCounterclockwise;
     private float randomAngle =  ((float) Math.random() * 30f);
     private float angle, armRotation;
     private Vector2 labelPosition, pointPosition;
@@ -39,8 +39,8 @@ public class GameAngle extends Group {
         arm = new Arm(armTexture, randomAngle);
         arm2 = new Arm(armTexture, randomAngle+angle);
         label = new Label(labelTexture, labelName);
-        //arrowClockwise = new Image(arrowClockwiseTexture);
-        //arrowCounterclockwise = new Image(arrowCounterclockwiseTexture);
+        arrowClockwise = new Image(arrowClockwiseTexture);
+        arrowCounterclockwise = new Image(arrowCounterclockwiseTexture);
         highlightArm = new Arm(highlightArmTexture, randomAngle);
         highlightArm2 = new Arm(highlightArmTexture, randomAngle+angle);
 
@@ -52,33 +52,33 @@ public class GameAngle extends Group {
         this.angle = angle;
         this.deltaAngle = 0;
 
-        labelPosition = new Vector2(point.getX() - 2 * point.getWidth(), point.getY());
         pointPosition = position;
 
         // no more rotation
         //setupArmListener();
 
         armRotation = arm.getRotation();
-        label.setOrigin(2.5f * point.getWidth(), 0);
-        label.setRotation(arm.getRotation());
+        //label.setPosition(labelPosition.x, labelPosition.y);
+        //label.setOrigin(point.getWidth(), 0);
+        //label.setRotation(arm.getRotation());
 
         arm.setZIndex(0);
         arm2.setZIndex(1);
         point.setZIndex(3);
     }
 
-//    public void setArrows(boolean mode){
-//        if (mode){
-//            addActor(arrowClockwise);
-//            addActor(arrowCounterclockwise);
-//            arrowClockwise.setZIndex(2);
-//            arrowCounterclockwise.setZIndex(2);
-//        }
-//        else {
-//            arrowClockwise.remove();
-//            arrowCounterclockwise.remove();
-//        }
-//    }
+    public void setArrows(boolean mode){
+        if (mode){
+            addActor(arrowClockwise);
+            addActor(arrowCounterclockwise);
+            arrowClockwise.setZIndex(2);
+            arrowCounterclockwise.setZIndex(2);
+        }
+        else {
+            arrowClockwise.remove();
+            arrowCounterclockwise.remove();
+        }
+    }
 
     public void setHighlightInitial(){
         addActor(highlightArm);
@@ -128,8 +128,9 @@ public class GameAngle extends Group {
         float armPosX = point.getX() + point.getWidth() / 2;
         float armPosY = point.getY() + point.getHeight() / 2;
 
-        updateLabelRotation();
 
+        updateLabelPosition();
+        //updateLabelRotation();
         arm.setPosition(armPosX, armPosY);
         arm2.setPosition(armPosX, armPosY);
 
@@ -138,13 +139,13 @@ public class GameAngle extends Group {
 
         label.setPosition(labelPosition.x, labelPosition.y);
 
-//        arrowClockwise.setPosition(point.getX() + point.getWidth() / 2 - arrowClockwise.getWidth() / 2 - 2, point.getY() + point.getHeight() / 2 - arrowClockwise.getHeight() / 2);
-//        arrowCounterclockwise.setPosition(point.getX() + point.getWidth() / 2 - arrowCounterclockwise.getWidth() / 2 - 1, point.getY() + point.getHeight() / 2 - arrowClockwise.getHeight() / 2 - 6);
-//
-//        arrowClockwise.setOrigin(arrowClockwise.getWidth()/2 , arrowClockwise.getHeight()/ 2);
-//        arrowClockwise.rotateBy(1);
-//        arrowCounterclockwise.setOrigin(arrowCounterclockwise.getWidth()/2, arrowCounterclockwise.getHeight()/2 - 2);
-//        arrowCounterclockwise.rotateBy(-1);
+        arrowClockwise.setPosition(point.getX() + point.getWidth() / 2 - arrowClockwise.getWidth() / 2 - 2, point.getY() + point.getHeight() / 2 - arrowClockwise.getHeight() / 2);
+        arrowCounterclockwise.setPosition(point.getX() + point.getWidth() / 2 - arrowCounterclockwise.getWidth() / 2 - 1, point.getY() + point.getHeight() / 2 - arrowClockwise.getHeight() / 2 - 6);
+
+        arrowClockwise.setOrigin(arrowClockwise.getWidth()/2 , arrowClockwise.getHeight()/ 2);
+        arrowClockwise.rotateBy(1);
+        arrowCounterclockwise.setOrigin(arrowCounterclockwise.getWidth()/2, arrowCounterclockwise.getHeight()/2 - 2);
+        arrowCounterclockwise.rotateBy(-1);
         super.act(delta);
     }
 
@@ -175,11 +176,14 @@ public class GameAngle extends Group {
         arm.addListener(dragArmListener);
         arm2.addListener(dragArmListener);
     }
-    private void updateLabelRotation() {
+
+    private void updateLabelPosition(){
         if (pointPosition != new Vector2(point.getX(), point.getY())) {
-            labelPosition = new Vector2(point.getX() - 2 * point.getWidth(), point.getY());
             pointPosition = new Vector2(point.getX(), point.getY());
+            labelPosition = new Vector2(point.getX() - (1/2) * point.getWidth(), point.getY());
         }
+    }
+    private void updateLabelRotation() {
         if (armRotation != arm.getRotation()){
             label.setOrigin(2.6f * point.getWidth(), 5);
             label.rotateBy(- armRotation + arm.getRotation());

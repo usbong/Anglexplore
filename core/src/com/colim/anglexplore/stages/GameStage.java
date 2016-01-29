@@ -41,6 +41,7 @@ public class GameStage extends Stage {
 
     private Text text;
     ClickListener clickListener;
+    private boolean rotated = false;
 
 
     public GameStage(){
@@ -134,20 +135,20 @@ public class GameStage extends Stage {
             addActor(angle);
             angle.addListener(clickListener = new ClickListener(){
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                    toggleArrowsVisibility(angle);
+                    //toggleArrowsVisibility(angle);
                     return true;
                 }
             });
         }
     }
 
-    public void toggleArrowsVisibility(GameAngle activeAngle){
-        for(GameAngle angle : angles){
-            angle.setArrows(false);
-        }
-        activeAngle.setArrows(true);
-        activeAngle.removeListener(clickListener);
-    }
+//    public void toggleArrowsVisibility(GameAngle activeAngle){
+//        for(GameAngle angle : angles){
+//            angle.setArrows(false);
+//        }
+//        activeAngle.setArrows(true);
+//        activeAngle.removeListener(clickListener);
+//    }
 
     public void updateGameAngles(List<GameAngle> angles){
         for (GameAngle angle : angles){
@@ -179,9 +180,12 @@ public class GameStage extends Stage {
                 boolean currInitAgainstTermCollide = validAngleDiff(currentAngle.getInitialAngle(), againstAngle.getTerminalAngle());
                 boolean currTermAgainstInitCollide = validAngleDiff(currentAngle.getTerminalAngle(), againstAngle.getInitialAngle());
 
-                if(validPointDistance(currentAngle.getPointPosition(), againstAngle.getPointPosition()) &&
-                        (currInitAgainstTermCollide || currTermAgainstInitCollide)) {
+                if(validPointDistance(currentAngle.getPointPosition(), againstAngle.getPointPosition())) {
 
+                    if (!rotated) {
+                        currentAngle.changeArmAngle(againstAngle.getArmAngle());
+                        rotated = true;
+                    }
                     angleSum = currentAngle.getAngle() + againstAngle.getAngle();
 
                     if(angleSum == 90.0 || angleSum == 180.0) {
@@ -217,6 +221,7 @@ public class GameStage extends Stage {
                     againstAngle.clearHighlight();
                 }
             }
+            rotated = false;
         }
     }
 

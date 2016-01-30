@@ -24,10 +24,6 @@ public class AssetLoaderGame {
 
         texturesGame.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         vertex = new TextureRegion(texturesGame, 0, 50, 100, 100);
-//        vertex = new TextureRegion(textureVertex, 0, 0, 100, 100);
-        //arm = new TextureRegion(texturesGame, 66, 104, 127, 5);
-        // 2x higher
-
 
         arm = new TextureRegion(texturesGame, 100, 56, 175, 6);
         highlightArm= new TextureRegion(texturesGame, 100, 50, 175, 6);

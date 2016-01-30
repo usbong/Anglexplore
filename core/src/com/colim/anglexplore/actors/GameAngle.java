@@ -27,15 +27,8 @@ public class GameAngle extends Group {
     private float angle, armRotation;
     private Vector2 labelPosition, pointPosition;
     private Label label;
-    private DragListener dragArmListener;
-
-    private Vector2 startPoint, draggingPoint;
-    private float deltaAngle;
 
     private boolean labelFlipped;
-
-    private boolean initArmHighlighted = false;
-    private boolean termArmHighlighted = false;
 
     public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion highlightArmTexture, TextureRegion arrowClockwiseTexture, TextureRegion arrowCounterclockwiseTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
 
@@ -59,19 +52,10 @@ public class GameAngle extends Group {
         highlightArm.setVisible(false);
         highlightArm2.setVisible(false);
 
-
         this.angle = angle;
-        this.deltaAngle = 0;
-
         pointPosition = position;
 
-        // no more rotation
-        //setupArmListener();
-
         armRotation = arm.getRotation();
-        //label.setPosition(labelPosition.x, labelPosition.y);
-        //label.setOrigin(point.getWidth(), 0);
-        //label.setRotation(arm.getRotation());
 
         arm.setZIndex(0);
         arm2.setZIndex(1);
@@ -92,33 +76,20 @@ public class GameAngle extends Group {
     }
 
     public void setHighlightInitial(){
-        System.out.println("HIGHLIGHT INIT");
         highlightArm.setVisible(true);
         arm2.setVisible(false);
 
     }
     public void setHighlightTerminal(){
-        System.out.println("HIGHLIGHT TERM");
         highlightArm2.setVisible(true);
         arm.setVisible(false);
     }
 
     public void clearHighlight(){
-//        if (initArmHighlighted){
-//            highlightArm.setVisible(false);
-//            initArmHighlighted = false;
-//            System.out.println("REMOVE INIT");
-//        }
-//        if (termArmHighlighted){
-//            highlightArm2.setVisible(false);
-//            termArmHighlighted = false;
-//            System.out.println("REMOVE TERM");
-//        }
         highlightArm.setVisible(false);
         highlightArm2.setVisible(false);
         arm.setVisible(true);
         arm2.setVisible(true);
-
     }
 
     public Vector2 getPointPosition() {
@@ -155,7 +126,6 @@ public class GameAngle extends Group {
 
 
         updateLabelPosition();
-        //updateLabelRotation();
         arm.setPosition(armPosX, armPosY);
         arm2.setPosition(armPosX, armPosY);
 
@@ -180,31 +150,11 @@ public class GameAngle extends Group {
         label.draw(batch, parentAlpha);
     }
 
-    public void setupArmListener(){
-        dragArmListener = new DragListener() {
-            @Override
-            public void dragStart(InputEvent event, float x, float y, int pointer) {
-                startPoint = new Vector2(arm.getImageX(), arm.getImageY());
-            }
-
-            public void drag(InputEvent event, float x, float y, int pointer) {
-                draggingPoint = new Vector2(x, y).sub(startPoint);
-                deltaAngle = MathUtils.atan2(draggingPoint.y, draggingPoint.x) * MathUtils.radiansToDegrees;
-                arm.rotateBy(deltaAngle);
-                highlightArm.rotateBy(deltaAngle);
-                arm2.rotateBy(deltaAngle);
-                highlightArm2.rotateBy(deltaAngle);
-            }
-        };
-
-        arm.addListener(dragArmListener);
-        arm2.addListener(dragArmListener);
-    }
-
     private void updateLabelPosition(){
         if (pointPosition != new Vector2(point.getX(), point.getY())) {
             pointPosition = new Vector2(point.getX(), point.getY());
             labelPosition = new Vector2(point.getX() - (1/2) * point.getWidth(), point.getY());
+            // Should reset angle highlighting when angle is moved
             clearHighlight();
         }
     }

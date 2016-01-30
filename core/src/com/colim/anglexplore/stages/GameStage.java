@@ -198,9 +198,7 @@ public class GameStage extends Stage {
                             currentAngle.setHighlightInitial();
                             againstAngle.setHighlightTerminal();
                         }
-                        System.out.println("highlighted");
                     }
-
 
                     if(angleSum == 90.0){
                         result = "Complementary";
@@ -218,17 +216,10 @@ public class GameStage extends Stage {
                             + String.valueOf(againstAngle.getLabelName() + " are " + result
                             + " angles. The sum of their angle measure is " + String.format("%.2f", angleSum) + " degrees.")));
                 }
-
-//                else{
-//                    System.out.println("removed");
-//                    currentAngle.clearHighlight();
-//                    againstAngle.clearHighlight();
-//                }
             }
             rotated = false;
         }
     }
-
 
     @Override
     public void act(float delta) {

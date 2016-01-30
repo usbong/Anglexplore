@@ -52,6 +52,13 @@ public class GameAngle extends Group {
         addActor(arm);
         addActor(arm2);
         addActor(point);
+        addActor(highlightArm);
+        addActor(highlightArm2);
+        highlightArm.setZIndex(2);
+        highlightArm2.setZIndex(2);
+        highlightArm.setVisible(false);
+        highlightArm2.setVisible(false);
+
 
         this.angle = angle;
         this.deltaAngle = 0;
@@ -68,7 +75,7 @@ public class GameAngle extends Group {
 
         arm.setZIndex(0);
         arm2.setZIndex(1);
-        point.setZIndex(3);
+        point.setZIndex(9);
     }
 
     public void setArrows(boolean mode){
@@ -85,30 +92,32 @@ public class GameAngle extends Group {
     }
 
     public void setHighlightInitial(){
-        if (!this.initArmHighlighted) {
-            addActor(highlightArm);
-            highlightArm.setZIndex(2);
-            this.initArmHighlighted = true;
-        }
+        System.out.println("HIGHLIGHT INIT");
+        highlightArm.setVisible(true);
+        arm2.setVisible(false);
+
     }
     public void setHighlightTerminal(){
-        if (!this.termArmHighlighted) {
-            addActor(highlightArm2);
-            highlightArm2.setZIndex(2);
-            this.termArmHighlighted = true;
-        }
+        System.out.println("HIGHLIGHT TERM");
+        highlightArm2.setVisible(true);
+        arm.setVisible(false);
     }
 
     public void clearHighlight(){
-        if (this.initArmHighlighted){
-            highlightArm.remove();
-            this.initArmHighlighted = false;
-        }
-
-        if (this.termArmHighlighted){
-            highlightArm2.remove();
-            this.termArmHighlighted = false;
-        }
+//        if (initArmHighlighted){
+//            highlightArm.setVisible(false);
+//            initArmHighlighted = false;
+//            System.out.println("REMOVE INIT");
+//        }
+//        if (termArmHighlighted){
+//            highlightArm2.setVisible(false);
+//            termArmHighlighted = false;
+//            System.out.println("REMOVE TERM");
+//        }
+        highlightArm.setVisible(false);
+        highlightArm2.setVisible(false);
+        arm.setVisible(true);
+        arm2.setVisible(true);
 
     }
 
@@ -141,7 +150,7 @@ public class GameAngle extends Group {
 
     @Override
     public void act(float delta) {
-        float armPosX = point.getX() + point.getWidth() / 2;
+        float armPosX = point.getX() + point.getWidth() / 2 ;
         float armPosY = point.getY() + point.getHeight() / 2;
 
 
@@ -172,7 +181,6 @@ public class GameAngle extends Group {
     }
 
     public void setupArmListener(){
-
         dragArmListener = new DragListener() {
             @Override
             public void dragStart(InputEvent event, float x, float y, int pointer) {
@@ -197,6 +205,7 @@ public class GameAngle extends Group {
         if (pointPosition != new Vector2(point.getX(), point.getY())) {
             pointPosition = new Vector2(point.getX(), point.getY());
             labelPosition = new Vector2(point.getX() - (1/2) * point.getWidth(), point.getY());
+            clearHighlight();
         }
     }
     private void updateLabelRotation() {

@@ -116,12 +116,12 @@ public class GameStage extends Stage {
 
         // another ugly hack
         List<Vector2> initialPositions = new LinkedList<Vector2>();
-        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 - 40));
-        initialPositions.add(new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 - 40));
-        initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 - 40));
-        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 - 40));
-        initialPositions.add(new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 - 40));
-        initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 - 40));
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /5, 3* Constants.WORLD_HEIGHT /4 - 70));
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /2, 3* Constants.WORLD_HEIGHT /4 - 70));
+        initialPositions.add(new Vector2(4 * Constants.WORLD_WIDTH /5, 3* Constants.WORLD_HEIGHT /4 - 70));
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /5, 2* Constants.WORLD_HEIGHT /4 - 80));
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /2, 2* Constants.WORLD_HEIGHT /4 - 80));
+        initialPositions.add(new Vector2(4 * Constants.WORLD_WIDTH /5, 2* Constants.WORLD_HEIGHT /4 - 80));
         Collections.shuffle(initialPositions);
 
         angles.add(new GameAngle(pointTexture, armTexture, highlightArmTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(0)), letters.get(0), initialPositions.get(0) , angle_x));
@@ -171,7 +171,6 @@ public class GameStage extends Stage {
     public void checkCollision(List <GameAngle> angles){
         float angleSum;
         String result;
-
         ArrayList<GameAngle> highlightedAnglesInCurrentLoop = new ArrayList<GameAngle>();
 
         for(int angleCurrentIndex = 0; angleCurrentIndex < angles.size(); angleCurrentIndex++) {
@@ -188,6 +187,7 @@ public class GameStage extends Stage {
                 boolean currInitAgainstTermCollide = validAngleDiff(currentAngle.getInitialAngle(), againstAngle.getTerminalAngle());
                 boolean currTermAgainstInitCollide = validAngleDiff(currentAngle.getTerminalAngle(), againstAngle.getInitialAngle());
 
+
                 if(validPointDistance(currentAngle.getPointPosition(), againstAngle.getPointPosition())) {
                     System.out.println("Valid point distance");
                     if (!rotated) {
@@ -195,7 +195,7 @@ public class GameStage extends Stage {
                         rotated = true;
                     }
 
-                    if(angleSum == 90.0 || angleSum == 180.0) {
+                    if((angleSum == 90.0 || angleSum == 180.0)) {
                         if(currInitAgainstTermCollide){
                             currentAngle.setHighlightTerminal();
                             againstAngle.setHighlightInitial();
@@ -207,7 +207,9 @@ public class GameStage extends Stage {
 
                         highlightedAnglesInCurrentLoop.add(currentAngle);
                         highlightedAnglesInCurrentLoop.add(againstAngle);
+                        System.out.println("highlighted");
                     }
+
 
                     if(angleSum == 90.0){
                         result = "Complementary";
@@ -230,9 +232,7 @@ public class GameStage extends Stage {
                     currentAngle.clearHighlight();
                     againstAngle.clearHighlight();
                 }
-
             }
-
             rotated = false;
         }
     }
@@ -241,6 +241,7 @@ public class GameStage extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
+
         this.checkCollision(angles);
     }
 

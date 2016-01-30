@@ -1,5 +1,6 @@
 package com.colim.anglexplore.stages;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -170,12 +171,16 @@ public class GameStage extends Stage {
     public void checkCollision(List <GameAngle> angles){
         float angleSum;
         String result;
+        ArrayList<GameAngle> highlightedAnglesInCurrentLoop = new ArrayList<GameAngle>();
 
         for(int angleCurrentIndex = 0; angleCurrentIndex < angles.size(); angleCurrentIndex++) {
             for(int angleAgainstIndex = angleCurrentIndex+1; angleAgainstIndex < angles.size(); angleAgainstIndex++) {
-
                 GameAngle currentAngle = angles.get(angleCurrentIndex);
                 GameAngle againstAngle = angles.get(angleAgainstIndex);
+
+                if(highlightedAnglesInCurrentLoop.contains(currentAngle) || highlightedAnglesInCurrentLoop.contains(againstAngle)) {
+                    continue;
+                }
 
                 angleSum = currentAngle.getAngle() + againstAngle.getAngle();
 
@@ -184,6 +189,7 @@ public class GameStage extends Stage {
 
 
                 if(validPointDistance(currentAngle.getPointPosition(), againstAngle.getPointPosition())) {
+                    System.out.println("Valid point distance");
                     if (!rotated) {
                         currentAngle.changeArmAngle(againstAngle.getArmAngle());
                         rotated = true;
@@ -198,6 +204,9 @@ public class GameStage extends Stage {
                             currentAngle.setHighlightInitial();
                             againstAngle.setHighlightTerminal();
                         }
+
+                        highlightedAnglesInCurrentLoop.add(currentAngle);
+                        highlightedAnglesInCurrentLoop.add(againstAngle);
                         System.out.println("highlighted");
                     }
 
@@ -218,12 +227,11 @@ public class GameStage extends Stage {
                             + String.valueOf(againstAngle.getLabelName() + " are " + result
                             + " angles. The sum of their angle measure is " + String.format("%.2f", angleSum) + " degrees.")));
                 }
-
-//                else{
-//                    System.out.println("removed");
-//                    currentAngle.clearHighlight();
-//                    againstAngle.clearHighlight();
-//                }
+                else{
+                    System.out.println("Not valid point distance");
+                    currentAngle.clearHighlight();
+                    againstAngle.clearHighlight();
+                }
             }
             rotated = false;
         }

@@ -85,29 +85,33 @@ public class GameAngle extends Group {
     }
 
     public void setHighlightInitial(){
-        if (!this.initArmHighlighted) {
+        if (!initArmHighlighted) {
+            System.out.println("HIGHLIGHT INIT");
             addActor(highlightArm);
             highlightArm.setZIndex(2);
-            this.initArmHighlighted = true;
+            initArmHighlighted = true;
         }
     }
     public void setHighlightTerminal(){
-        if (!this.termArmHighlighted) {
+
+        if (!termArmHighlighted) {
+            System.out.println("HIGHLIGHT TERM");
             addActor(highlightArm2);
             highlightArm2.setZIndex(2);
-            this.termArmHighlighted = true;
+            termArmHighlighted = true;
         }
     }
 
     public void clearHighlight(){
-        if (this.initArmHighlighted){
+        if (initArmHighlighted){
             highlightArm.remove();
-            this.initArmHighlighted = false;
+            initArmHighlighted = false;
+            System.out.println("REMOVE INIT");
         }
-
-        if (this.termArmHighlighted){
+        if (termArmHighlighted){
             highlightArm2.remove();
-            this.termArmHighlighted = false;
+            termArmHighlighted = false;
+            System.out.println("REMOVE TERM");
         }
 
     }
@@ -141,7 +145,7 @@ public class GameAngle extends Group {
 
     @Override
     public void act(float delta) {
-        float armPosX = point.getX() + point.getWidth() / 2;
+        float armPosX = point.getX() + point.getWidth() / 2 ;
         float armPosY = point.getY() + point.getHeight() / 2;
 
 
@@ -172,7 +176,6 @@ public class GameAngle extends Group {
     }
 
     public void setupArmListener(){
-
         dragArmListener = new DragListener() {
             @Override
             public void dragStart(InputEvent event, float x, float y, int pointer) {

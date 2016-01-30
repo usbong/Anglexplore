@@ -23,13 +23,14 @@ public class AssetLoaderGame {
         textureVertex = new Texture(Gdx.files.internal("AssetsVertex.png"));
 
         texturesGame.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-//        vertex = new TextureRegion(texturesGame, 0, 50, 24, 25);
-        vertex = new TextureRegion(textureVertex, 0, 0, 100, 100);
+        vertex = new TextureRegion(texturesGame, 0, 50, 100, 100);
+//        vertex = new TextureRegion(textureVertex, 0, 0, 100, 100);
         //arm = new TextureRegion(texturesGame, 66, 104, 127, 5);
         // 2x higher
 
-        arm = new TextureRegion(texturesGame, 25, 56, 150, 7);
-        highlightArm = new TextureRegion(texturesGame, 25, 50, 150, 6);
+
+        arm = new TextureRegion(texturesGame, 100, 56, 175, 6);
+        highlightArm= new TextureRegion(texturesGame, 100, 50, 175, 6);
 
         arrowClockwise = new TextureRegion(texturesGameSelected, 6, 11, 63, 63);
         arrowCounterclockwise = new TextureRegion(texturesGameSelected, 74, 0, 74, 81);

@@ -115,12 +115,12 @@ public class GameStage extends Stage {
 
         // another ugly hack
         List<Vector2> initialPositions = new LinkedList<Vector2>();
-        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 - 40));
-        initialPositions.add(new Vector2(2 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 - 40));
-        initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 3* Constants.WORLD_HEIGHT /4 - 40));
-        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 - 40));
-        initialPositions.add(new Vector2(2 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 - 40));
-        initialPositions.add(new Vector2(3 * Constants.WORLD_WIDTH /4 , 2* Constants.WORLD_HEIGHT /4 - 40));
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /5, 3* Constants.WORLD_HEIGHT /4 - 70));
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /2, 3* Constants.WORLD_HEIGHT /4 - 70));
+        initialPositions.add(new Vector2(4 * Constants.WORLD_WIDTH /5, 3* Constants.WORLD_HEIGHT /4 - 70));
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /5, 2* Constants.WORLD_HEIGHT /4 - 80));
+        initialPositions.add(new Vector2(Constants.WORLD_WIDTH /2, 2* Constants.WORLD_HEIGHT /4 - 80));
+        initialPositions.add(new Vector2(4 * Constants.WORLD_WIDTH /5, 2* Constants.WORLD_HEIGHT /4 - 80));
         Collections.shuffle(initialPositions);
 
         angles.add(new GameAngle(pointTexture, armTexture, highlightArmTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture, lettersTextures.getLetter(letters.get(0)), letters.get(0), initialPositions.get(0) , angle_x));
@@ -188,6 +188,7 @@ public class GameStage extends Stage {
                     }
 
                     if(angleSum == 90.0 || angleSum == 180.0) {
+                        System.out.println("highlighted");
                         if(currInitAgainstTermCollide){
                             currentAngle.setHighlightTerminal();
                             againstAngle.setHighlightInitial();
@@ -215,11 +216,12 @@ public class GameStage extends Stage {
                             + String.valueOf(againstAngle.getLabelName() + " are " + result
                             + " angles. The sum of their angle measure is " + String.format("%.2f", angleSum) + " degrees.")));
                 }
+
 //                else{
+//                    System.out.println("removed");
 //                    currentAngle.clearHighlight();
 //                    againstAngle.clearHighlight();
 //                }
-
             }
 
             rotated = false;

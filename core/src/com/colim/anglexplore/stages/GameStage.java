@@ -170,6 +170,7 @@ public class GameStage extends Stage {
     public void checkCollision(List <GameAngle> angles){
         float angleSum;
         String result;
+
         for(int angleCurrentIndex = 0; angleCurrentIndex < angles.size(); angleCurrentIndex++) {
             for(int angleAgainstIndex = angleCurrentIndex+1; angleAgainstIndex < angles.size(); angleAgainstIndex++) {
 
@@ -181,24 +182,25 @@ public class GameStage extends Stage {
                 boolean currInitAgainstTermCollide = validAngleDiff(currentAngle.getInitialAngle(), againstAngle.getTerminalAngle());
                 boolean currTermAgainstInitCollide = validAngleDiff(currentAngle.getTerminalAngle(), againstAngle.getInitialAngle());
 
+
                 if(validPointDistance(currentAngle.getPointPosition(), againstAngle.getPointPosition())) {
                     if (!rotated) {
                         currentAngle.changeArmAngle(againstAngle.getArmAngle());
                         rotated = true;
                     }
 
-                    if(angleSum == 90.0 || angleSum == 180.0) {
-                        System.out.println("highlighted");
+                    if((angleSum == 90.0 || angleSum == 180.0)) {
                         if(currInitAgainstTermCollide){
                             currentAngle.setHighlightTerminal();
                             againstAngle.setHighlightInitial();
-
                         }
                         else if(currTermAgainstInitCollide){
                             currentAngle.setHighlightInitial();
                             againstAngle.setHighlightTerminal();
                         }
+                        System.out.println("highlighted");
                     }
+
 
                     if(angleSum == 90.0){
                         result = "Complementary";
@@ -223,7 +225,6 @@ public class GameStage extends Stage {
 //                    againstAngle.clearHighlight();
 //                }
             }
-
             rotated = false;
         }
     }
@@ -232,6 +233,7 @@ public class GameStage extends Stage {
     @Override
     public void act(float delta) {
         super.act(delta);
+
         this.checkCollision(angles);
     }
 

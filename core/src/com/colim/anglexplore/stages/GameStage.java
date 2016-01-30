@@ -43,7 +43,6 @@ public class GameStage extends Stage {
     ClickListener clickListener;
     private boolean rotated = false;
 
-
     public GameStage(){
 
         super(new StretchViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT,
@@ -177,16 +176,16 @@ public class GameStage extends Stage {
                 GameAngle currentAngle = angles.get(angleCurrentIndex);
                 GameAngle againstAngle = angles.get(angleAgainstIndex);
 
+                angleSum = currentAngle.getAngle() + againstAngle.getAngle();
+
                 boolean currInitAgainstTermCollide = validAngleDiff(currentAngle.getInitialAngle(), againstAngle.getTerminalAngle());
                 boolean currTermAgainstInitCollide = validAngleDiff(currentAngle.getTerminalAngle(), againstAngle.getInitialAngle());
 
                 if(validPointDistance(currentAngle.getPointPosition(), againstAngle.getPointPosition())) {
-
                     if (!rotated) {
                         currentAngle.changeArmAngle(againstAngle.getArmAngle());
                         rotated = true;
                     }
-                    angleSum = currentAngle.getAngle() + againstAngle.getAngle();
 
                     if(angleSum == 90.0 || angleSum == 180.0) {
                         if(currInitAgainstTermCollide){
@@ -216,11 +215,13 @@ public class GameStage extends Stage {
                             + String.valueOf(againstAngle.getLabelName() + " are " + result
                             + " angles. The sum of their angle measure is " + String.format("%.2f", angleSum) + " degrees.")));
                 }
-                else {
-                    currentAngle.clearHighlight();
-                    againstAngle.clearHighlight();
-                }
+//                else{
+//                    currentAngle.clearHighlight();
+//                    againstAngle.clearHighlight();
+//                }
+
             }
+
             rotated = false;
         }
     }

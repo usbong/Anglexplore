@@ -33,6 +33,10 @@ public class GameAngle extends Group {
     private float deltaAngle;
 
     private boolean labelFlipped;
+
+    private boolean initArmHighlighted = false;
+    private boolean termArmHighlighted = false;
+
     public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion highlightArmTexture, TextureRegion arrowClockwiseTexture, TextureRegion arrowCounterclockwiseTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
 
         point = new Point(pointTexture, position);
@@ -81,19 +85,31 @@ public class GameAngle extends Group {
     }
 
     public void setHighlightInitial(){
-        addActor(highlightArm);
-        highlightArm.setZIndex(2);
-
+        if (!this.initArmHighlighted) {
+            addActor(highlightArm);
+            highlightArm.setZIndex(2);
+            this.initArmHighlighted = true;
+        }
     }
-
     public void setHighlightTerminal(){
-        addActor(highlightArm2);
-        highlightArm2.setZIndex(2);
+        if (!this.termArmHighlighted) {
+            addActor(highlightArm2);
+            highlightArm2.setZIndex(2);
+            this.termArmHighlighted = true;
+        }
     }
 
     public void clearHighlight(){
-        highlightArm.remove();
-        highlightArm2.remove();
+        if (this.initArmHighlighted){
+            highlightArm.remove();
+            this.initArmHighlighted = false;
+        }
+
+        if (this.termArmHighlighted){
+            highlightArm2.remove();
+            this.termArmHighlighted = false;
+        }
+
     }
 
     public Vector2 getPointPosition() {
@@ -205,6 +221,8 @@ public class GameAngle extends Group {
     public void changeArmAngle(float delta) {
         arm.setRotation(delta);
         arm2.setRotation(arm.getRotation() + angle);
+        highlightArm.setRotation(delta);
+        highlightArm2.setRotation(highlightArm.getRotation() + angle);
     }
 
     public float getArmAngle(){

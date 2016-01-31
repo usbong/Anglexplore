@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
+import static java.lang.Math.abs;
+
 /*
  * Created by Hadrian Paulo Lim on 2015.
  *
@@ -27,8 +29,7 @@ public class GameAngle extends Group {
     private float angle, armRotation;
     private Vector2 labelPosition, pointPosition;
     private Label label;
-
-    private boolean labelFlipped;
+    public float otherAngleLabelPositionX;
 
     public GameAngle(TextureRegion pointTexture, TextureRegion armTexture, TextureRegion highlightArmTexture, TextureRegion arrowClockwiseTexture, TextureRegion arrowCounterclockwiseTexture, TextureRegion labelTexture, char labelName, Vector2 position, float angle){
 
@@ -54,6 +55,7 @@ public class GameAngle extends Group {
 
         this.angle = angle;
         pointPosition = position;
+        otherAngleLabelPositionX = 0;
 
         armRotation = arm.getRotation();
 
@@ -124,8 +126,11 @@ public class GameAngle extends Group {
         float armPosX = point.getX() + point.getWidth() / 2 ;
         float armPosY = point.getY() + point.getHeight() / 2;
 
-
         updateLabelPosition();
+
+        if(checkOverlappingLabels(otherAngleLabelPositionX)){
+            labelPosition.x += 60;
+        }
         arm.setPosition(armPosX, armPosY);
         arm2.setPosition(armPosX, armPosY);
 
@@ -153,27 +158,28 @@ public class GameAngle extends Group {
     private void updateLabelPosition(){
         if (pointPosition != new Vector2(point.getX(), point.getY())) {
             pointPosition = new Vector2(point.getX(), point.getY());
-            labelPosition = new Vector2(point.getX() - (1/2) * point.getWidth(), point.getY());
+            labelPosition = new Vector2(point.getX() - (1/2) * point.getWidth(), point.getY() - 10);
             // Should reset angle highlighting when angle is moved
             clearHighlight();
         }
     }
+
     private void updateLabelRotation() {
         if (armRotation != arm.getRotation()){
-            label.setOrigin(2.6f * point.getWidth(), 5);
+            label.setOrigin(point.getWidth(), 5);
             label.rotateBy(- armRotation + arm.getRotation());
-            if(Math.abs(arm.getRotation()) % 360 > 90 && Math.abs(arm.getRotation()) % 360 < 270  && !labelFlipped){
-                label.flip();
-                labelFlipped = true;
-                System.out.println("Flip1");
-            }
-            // something wrong here idk yet
-            else if ((Math.abs(arm.getRotation()) % 360 > 270 || Math.abs(arm.getRotation()) % 360 < 90) && labelFlipped)
-            {
-                label.flip();
-                labelFlipped = false;
-                System.out.println("Flip2");
-            }
+//            if(Math.abs(arm.getRotation()) % 360 > 90 && Math.abs(arm.getRotation()) % 360 < 270  && !labelFlipped){
+//                label.flip();
+//                labelFlipped = true;
+//                System.out.println("Flip1");
+//            }
+//            // something wrong here idk yet
+//            else if ((Math.abs(arm.getRotation()) % 360 > 270 || Math.abs(arm.getRotation()) % 360 < 90) && labelFlipped)
+//            {
+//                label.flip();
+//                labelFlipped = false;
+//                System.out.println("Flip2");
+//            }
             armRotation = arm.getRotation();
         }
     }
@@ -186,5 +192,16 @@ public class GameAngle extends Group {
 
     public float getArmAngle(){
         return arm2.getRotation();
+    }
+
+    public boolean checkOverlappingLabels(float x){
+        if (abs(labelPosition.x - x) < 40){
+            return true;
+        }
+        return false;
+    }
+
+    public Vector2 getLabelPosition() {
+        return labelPosition;
     }
 }

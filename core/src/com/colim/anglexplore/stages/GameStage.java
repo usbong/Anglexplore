@@ -132,12 +132,12 @@ public class GameStage extends Stage {
 
         for (final GameAngle angle : angles) {
             addActor(angle);
-            angle.addListener(clickListener = new ClickListener(){
-                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                    toggleArrowsVisibility(angle);
-                    return true;
-                }
-            });
+//            angle.addListener(clickListener = new ClickListener(){
+//                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+//                    toggleArrowsVisibility(angle);
+//                    return true;
+//                }
+//            });
         }
     }
 
@@ -188,6 +188,8 @@ public class GameStage extends Stage {
                         currentAngle.changeArmAngle(againstAngle.getArmAngle());
                         rotated = true;
                     }
+
+                    currentAngle.otherAngleLabelPositionX = againstAngle.getLabelPosition().x;
 
                     if((angleSum == 90.0 || angleSum == 180.0)) {
                         if(currInitAgainstTermCollide){

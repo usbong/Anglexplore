@@ -23,7 +23,7 @@ public class AssetLoaderGame {
         textureVertex = new Texture(Gdx.files.internal("AssetsVertex.png"));
 
         texturesGame.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-        vertex = new TextureRegion(texturesGame, 0, 50, 100, 100);
+        vertex = new TextureRegion(texturesGame, 0, 50, 99, 100);
 
         arm = new TextureRegion(texturesGame, 100, 56, 175, 6);
         highlightArm = new TextureRegion(texturesGame, 100, 50, 175, 6);

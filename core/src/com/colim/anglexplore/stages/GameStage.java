@@ -124,22 +124,22 @@ public class GameStage extends Stage {
 
         for (final GameAngle angle : angles) {
             addActor(angle);
-//            angle.addListener(clickListener = new ClickListener(){
-//                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-//                    toggleArrowsVisibility(angle);
-//                    return true;
-//                }
-//            });
+/*            angle.addListener(clickListener = new ClickListener(){
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                    toggleArrowsVisibility(angle);
+                    return true;
+                }
+            });*/
         }
     }
-//
-//    public void toggleArrowsVisibility(GameAngle activeAngle) {
-//        for (GameAngle angle : angles) {
-//            angle.setArrows(false);
-//        }
-//        activeAngle.setArrows(true);
-//        activeAngle.removeListener(clickListener);
-//    }
+/*
+    public void toggleArrowsVisibility(GameAngle activeAngle) {
+        for (GameAngle angle : angles) {
+            angle.setArrows(false);
+        }
+        activeAngle.setArrows(true);
+        activeAngle.removeListener(clickListener);
+    }*/
 
     public void updateGameAngles(List<GameAngle> angles) {
         for (GameAngle angle : angles) {

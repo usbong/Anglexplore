@@ -132,6 +132,12 @@ public class GameAngle extends Group {
         if (checkOverlappingLabels(otherAngleLabelPositionX)) {
             labelPosition.x += 60;
         }
+        arm.setOrigin(0, arm.getHeight()/2);
+        arm2.setOrigin(0, arm2.getHeight()/2);
+
+        highlightArm.setOrigin(0, highlightArm.getHeight()/2);
+        highlightArm2.setOrigin(0, highlightArm2.getHeight()/2);
+
         arm.setPosition(armPosX, armPosY);
         arm2.setPosition(armPosX, armPosY);
 
@@ -177,10 +183,7 @@ public class GameAngle extends Group {
     }
 
     public boolean checkOverlappingLabels(float x) {
-        if (abs(labelPosition.x - x) < 40) {
-            return true;
-        }
-        return false;
+        return abs(labelPosition.x - x) < 40;
     }
 
     public Vector2 getLabelPosition() {

@@ -20,27 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
 public class Point extends Image {
 
-    private Vector2 curPos;
-    public Point(TextureRegion texture, Vector2 position) {
-        super(texture);
-        setBounds(getX(), getY(), getWidth(), getHeight());
-        setPosition(position.x, position.y);
-        dragListener.setTapSquareSize(2);
-
-        this.curPos = position;
-        this.addListener(dragListener);
-    }
-
-
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-    }
-
-    public Vector2 getCurPos() {
-        return curPos.set(this.getX(), this.getY());
-    }
-
     DragListener dragListener = new DragListener() {
         private float startDragX, startDragY;
 
@@ -53,4 +32,25 @@ public class Point extends Image {
             moveBy(x - startDragX, y - startDragY);
         }
     };
+    private Vector2 curPos;
+
+
+    public Point(TextureRegion texture, Vector2 position) {
+        super(texture);
+        setBounds(getX(), getY(), getWidth(), getHeight());
+        setPosition(position.x, position.y);
+        dragListener.setTapSquareSize(2);
+
+        this.curPos = position;
+        this.addListener(dragListener);
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+    }
+
+    public Vector2 getCurPos() {
+        return curPos.set(this.getX(), this.getY());
+    }
 }

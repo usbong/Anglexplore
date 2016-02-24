@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,19 +25,19 @@ public class AssetLoaderGame {
         vertex = new TextureRegion(texturesGame, 0, 50, 100, 100);
 
         arm = new TextureRegion(texturesGame, 100, 56, 175, 6);
-        highlightArm= new TextureRegion(texturesGame, 100, 50, 175, 6);
+        highlightArm = new TextureRegion(texturesGame, 100, 50, 175, 6);
 
         arrowClockwise = new TextureRegion(texturesGameSelected, 6, 11, 63, 63);
         arrowCounterclockwise = new TextureRegion(texturesGameSelected, 74, 0, 74, 81);
 
-        for(int i=0; i<6; i++){
+        for (int i = 0; i < 6; i++) {
             letters.add(new TextureRegion(texturesGame, i * 40, 0, 40, 50));
         }
 
         System.out.println(letters.size());
     }
 
-    public static void dispose(){
+    public static void dispose() {
 
         texturesGame.dispose();
         texturesGameSelected.dispose();

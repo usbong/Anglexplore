@@ -20,7 +20,7 @@ public class AssetLoaderStart {
         screen_instructions = new TextureRegion(texturesStart, 0, 720, 1280, 720);
     }
 
-    public static void dispose(){
+    public static void dispose() {
         texturesStart.dispose();
     }
 }

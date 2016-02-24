@@ -16,7 +16,7 @@ public class Text extends com.badlogic.gdx.scenes.scene2d.ui.Label {
     @Override
     public void act(final float delta) {
         this.setText(text);
-        this.setPosition(Constants.WORLD_WIDTH/8, Constants.WORLD_HEIGHT/4);
+        this.setPosition(Constants.WORLD_WIDTH / 8, Constants.WORLD_HEIGHT / 4);
         super.act(delta);
     }
 }

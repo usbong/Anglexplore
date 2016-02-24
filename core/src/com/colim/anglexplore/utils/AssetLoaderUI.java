@@ -21,7 +21,7 @@ public class AssetLoaderUI {
         button_quit = new TextureRegion(texturesUI, 340, 853, 100, 56);
     }
 
-    public static void dispose(){
+    public static void dispose() {
         texturesUI.dispose();
     }
 }

@@ -8,7 +8,9 @@ package com.colim.anglexplore.utils;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /*
  * Created by Hadrian Paulo Lim on 2015.
@@ -19,7 +21,7 @@ import java.util.*;
 public class LettersTextures {
     private Map lettersMap = new HashMap();
 
-    public LettersTextures(List<TextureRegion> lettersTextureRegion){
+    public LettersTextures(List<TextureRegion> lettersTextureRegion) {
         int i = 0;
         for (char n = 'A'; n <= 'F'; n++) {
             lettersMap.put(n, lettersTextureRegion.get(i));
@@ -27,7 +29,7 @@ public class LettersTextures {
         }
     }
 
-    public TextureRegion getLetter(char letter){
+    public TextureRegion getLetter(char letter) {
         return ((TextureRegion) lettersMap.get(letter));
     }
 }

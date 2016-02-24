@@ -2,7 +2,7 @@ package com.colim.anglexplore.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.GL20;
 import com.colim.anglexplore.stages.GameStage;
 import com.colim.anglexplore.utils.AssetLoaderGame;
 import com.colim.anglexplore.utils.AssetLoaderUI;
@@ -17,7 +17,7 @@ public class GameScreen extends ScreenAdapter {
 
     private GameStage stage;
 
-    public GameScreen(){
+    public GameScreen() {
         stage = new GameStage();
         Gdx.input.setInputProcessor(stage);
     }
@@ -62,9 +62,9 @@ public class GameScreen extends ScreenAdapter {
         AssetLoaderUI.dispose();
     }
 
-    private void clearScreen(){
+    private void clearScreen() {
         Gdx.gl.glClearColor(255f, 255f,
-                           255f, 1);
+                255f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 

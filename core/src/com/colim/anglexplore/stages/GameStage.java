@@ -33,7 +33,6 @@ import java.util.List;
 
 public class GameStage extends Stage {
 
-    ClickListener clickListener;
     private GameUI gameUI;
     private TextureRegion pointTexture, armTexture, highlightArmTexture, arrowClockwiseTexture, arrowCounterclockwiseTexture;
     private List<GameAngle> angles;

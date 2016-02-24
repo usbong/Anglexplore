@@ -3,6 +3,7 @@ package com.colim.anglexplore.utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.colim.anglexplore.actors.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,10 @@ public class AssetLoaderGame {
 
         arm = new TextureRegion(texturesGame, 100, 56, 175, 6);
         highlightArm = new TextureRegion(texturesGame, 100, 50, 175, 6);
+        vertex.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+        arm.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+        highlightArm.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
+
 
         arrowClockwise = new TextureRegion(texturesGameSelected, 6, 11, 63, 63);
         arrowCounterclockwise = new TextureRegion(texturesGameSelected, 74, 0, 74, 81);

@@ -21,7 +21,7 @@ public class GameAngle extends Group {
     private Point point;
     private Arm arm, arm2, highlightArm, highlightArm2;
     private Image arrowClockwise, arrowCounterclockwise;
-    private float randomAngle = ((float) Math.random() * 30f);
+    private float randomAngle = ((float) Math.random() * 60f);
     private float angle;
     private Vector2 labelPosition, pointPosition;
     private Label label;
@@ -59,17 +59,17 @@ public class GameAngle extends Group {
         point.setZIndex(9);
     }
 
-    public void setArrows(boolean mode) {
-        if (mode) {
-            addActor(arrowClockwise);
-            addActor(arrowCounterclockwise);
-            arrowClockwise.setZIndex(2);
-            arrowCounterclockwise.setZIndex(2);
-        } else {
-            arrowClockwise.remove();
-            arrowCounterclockwise.remove();
-        }
-    }
+//    public void setArrows(boolean mode) {
+//        if (mode) {
+//            addActor(arrowClockwise);
+//            addActor(arrowCounterclockwise);
+//            arrowClockwise.setZIndex(2);
+//            arrowCounterclockwise.setZIndex(2);
+//        } else {
+//            arrowClockwise.remove();
+//            arrowCounterclockwise.remove();
+//        }
+//    }
 
     public void setHighlightInitial() {
         highlightArm.setVisible(true);

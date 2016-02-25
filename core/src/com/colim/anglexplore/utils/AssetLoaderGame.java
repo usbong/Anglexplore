@@ -25,8 +25,8 @@ public class AssetLoaderGame {
         texturesGame.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         vertex = new TextureRegion(texturesGame, 0, 50, 99, 100);
 
-        arm = new TextureRegion(texturesGame, 100, 56, 175, 6);
-        highlightArm = new TextureRegion(texturesGame, 100, 50, 175, 6);
+        arm = new TextureRegion(texturesGame, 101, 58, 175, 8);
+        highlightArm = new TextureRegion(texturesGame, 101, 50, 175, 8);
         vertex.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
         arm.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);
         highlightArm.getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Nearest);

@@ -21,7 +21,7 @@ public class GameAngle extends Group {
     private Point point;
     private Arm arm, arm2, highlightArm, highlightArm2;
     private Image arrowClockwise, arrowCounterclockwise;
-    private float randomAngle = ((float) Math.random() * 150f);
+    private float randomAngle = ((float) Math.random() * 360f);
     private float angle;
     private Vector2 labelPosition, pointPosition;
     private Label label;
